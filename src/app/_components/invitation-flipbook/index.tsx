@@ -3,7 +3,7 @@
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react'
 import { MotionConfig, motion } from 'motion/react'
 import Image from 'next/image'
-import { forwardRef, useCallback, useEffect, useRef, useState } from 'react'
+import { forwardRef, useCallback, useRef, useState, useSyncExternalStore } from 'react'
 import HTMLFlipBook from 'react-pageflip'
 
 import FallingPetals from '@/app/_components/falling-petals'
@@ -62,6 +62,10 @@ const pages = [
 
 const interactiveSelector = 'a, button, input, textarea, select, summary, [role="button"]'
 
+const subscribeNoop = () => () => {}
+const getClientSnapshot = () => true
+const getServerSnapshot = () => false
+
 const InvitationFlipbook = ({ guest }: { guest?: Guest | null }) => {
   const bookRef = useRef<PageFlipHandle>(null)
   const swipeStartRef = useRef<SwipeStart>(null)
@@ -73,23 +77,29 @@ const InvitationFlipbook = ({ guest }: { guest?: Guest | null }) => {
   const bookPageSize = useBookPageSize()
   const [activePage, setActivePage] = useState(0)
   const [pageState, setPageState] = useState('read')
-  const [orientation, setOrientation] = useState<'portrait' | 'landscape'>(
-    isCompactBook ? 'portrait' : 'landscape',
-  )
+  const [bookOrientation, setBookOrientation] = useState<{
+    compact: boolean
+    value: 'portrait' | 'landscape'
+  } | null>(null)
   const [flipDirection, setFlipDirection] = useState<'forward' | 'back' | null>(null)
-  const [mounted, setMounted] = useState(false)
+  const mounted = useSyncExternalStore(subscribeNoop, getClientSnapshot, getServerSnapshot)
+  const orientation =
+    bookOrientation?.compact === isCompactBook
+      ? bookOrientation.value
+      : isCompactBook
+        ? 'portrait'
+        : 'landscape'
 
   const effectiveFlipDirection = pageState === 'read' ? null : flipDirection
   const canFlipPrev = activePage > 0 && pageState === 'read'
   const canFlipNext = activePage < pages.length - 1 && pageState === 'read'
 
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  useEffect(() => {
-    setOrientation(isCompactBook ? 'portrait' : 'landscape')
-  }, [isCompactBook])
+  const rememberOrientation = (mode: string) => {
+    setBookOrientation({
+      compact: isCompactBook,
+      value: mode === 'portrait' ? 'portrait' : 'landscape',
+    })
+  }
 
   const flipToAdjacentPage = useCallback(
     (direction: 'next' | 'prev') => {
@@ -288,12 +298,10 @@ const InvitationFlipbook = ({ guest }: { guest?: Guest | null }) => {
                         disableFlipByClick
                         onFlip={(event) => setActivePage(Number(event.data))}
                         onChangeState={(event) => setPageState(String(event.data))}
-                        onChangeOrientation={(event) =>
-                          setOrientation(event.data === 'portrait' ? 'portrait' : 'landscape')
-                        }
+                        onChangeOrientation={(event) => rememberOrientation(String(event.data))}
                         onInit={(event) => {
                           const mode = (event.data as { mode?: string } | undefined)?.mode
-                          if (mode) setOrientation(mode === 'portrait' ? 'portrait' : 'landscape')
+                          if (mode) rememberOrientation(mode)
                         }}
                       >
                         {pages.map((page) => (

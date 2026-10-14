@@ -63,7 +63,7 @@ export const getOgFonts = () => {
 export const getOgAssets = () => {
   assetsPromise ??= Promise.all([
     readAsset('bg-new.png', 'image/png'),
-    readAsset('thiep-og.jpg', 'image/jpeg'),
+    readAsset('title.png', 'image/png'),
   ]).then(([background, invite]) => ({ background, invite }))
 
   return assetsPromise

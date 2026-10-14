@@ -17,8 +17,7 @@ export type Page3Wish = {
 
 const PAGE_2_WISHES: Page2Wish[] = [
   {
-    intro:
-      'Nhân ngày 20/10, Bateco Group xin gửi đến Chị lời chúc thật chân thành và ấm áp.',
+    intro: 'Nhân ngày 20/10, Bateco Group xin gửi đến Chị lời chúc thật chân thành và ấm áp.',
     body: 'Cảm ơn Chị đã luôn cố gắng mỗi ngày, vừa làm việc chỉn chu vừa mang lại không khí dễ chịu cho mọi người xung quanh. Những điều đó có vẻ nhỏ, nhưng lại khiến cả tập thể thấy ấm hơn rất nhiều.',
     closing:
       'Chúc Chị ngày 20/10 vui vẻ, được nghỉ ngơi đúng lúc và được quan tâm nhiều hơn một chút — không chỉ hôm nay mà cả những ngày thường!',
@@ -48,11 +47,9 @@ const PAGE_2_WISHES: Page2Wish[] = [
       'Chúc Chị ngày lễ vui vẻ, có thật nhiều niềm vui bất ngờ, và được nghỉ một chút giữa những ngày bận rộn!',
   },
   {
-    intro:
-      'Nhân ngày tôn vinh phụ nữ Việt Nam, xin gửi tới Chị lời chúc từ Bateco Group.',
+    intro: 'Nhân ngày tôn vinh phụ nữ Việt Nam, xin gửi tới Chị lời chúc từ Bateco Group.',
     body: 'Cảm ơn Chị vì sự chịu khó và tinh thần trách nhiệm. Những điều đó không ồn ào, không cần khoe ra, nhưng lại rất đáng quý với những người làm việc cùng Chị.',
-    closing:
-      'Chúc Chị luôn bình yên, được đối xử thật tốt mỗi ngày, và giữ được nụ cười của mình.',
+    closing: 'Chúc Chị luôn bình yên, được đối xử thật tốt mỗi ngày, và giữ được nụ cười của mình.',
   },
   {
     intro: 'Chúc Chị ngày 20/10 thật vui và thật nhẹ nhàng!',
@@ -67,8 +64,7 @@ const PAGE_2_WISHES: Page2Wish[] = [
       'Chúc Chị một ngày đặc biệt đúng như tên gọi của nó — đặc biệt với chính Chị, theo cách Chị muốn.',
   },
   {
-    intro:
-      'Ngày Phụ nữ Việt Nam 20/10, xin chúc Chị thật nhiều sức khỏe và niềm vui.',
+    intro: 'Ngày Phụ nữ Việt Nam 20/10, xin chúc Chị thật nhiều sức khỏe và niềm vui.',
     body: 'Bateco Group trân trọng sự đồng hành của Chị. Có những ngày bận rộn, nhưng nhờ có Chị mà mọi thứ vẫn đi đúng hướng — và cả team đều biết ơn vì điều đó.',
     closing:
       'Chúc Chị được quan tâm nhiều hơn, không chỉ hôm nay mà cả những ngày thường xuyên nhất.',
@@ -82,8 +78,7 @@ const PAGE_2_WISHES: Page2Wish[] = [
   {
     intro: 'Nhân dịp 20/10, xin gửi tới Chị lời chúc từ cả nhà Bateco.',
     body: 'Cảm ơn Chị vì đã luôn ở đó khi cần. Những hỗ trợ của Chị có khi chẳng ai nói ra thành lời, nhưng mọi người đều nhớ — và đều cảm ơn theo cách riêng của mình.',
-    closing:
-      'Chúc Chị được hạnh phúc theo cách đơn giản và thật nhất, không cần gì lớn lao.',
+    closing: 'Chúc Chị được hạnh phúc theo cách đơn giản và thật nhất, không cần gì lớn lao.',
   },
   {
     intro: 'Ngày 20/10 đến rồi — Bateco Group xin chúc Chị một ngày thật ấm.',
@@ -122,8 +117,7 @@ const PAGE_3_WISHES: Page3Wish[] = [
   {
     paragraph1:
       'Ngày 20/10 này, xin nhắc Chị một điều giản dị: Chị không cần hoàn hảo mới xứng đáng được yêu thương. Chị đã đủ tốt rồi — chỉ cần được nhìn thấy đúng cách.',
-    paragraph2:
-      'Chỉ cần là chính mình — đã là đủ đẹp, đủ đáng trân trọng rồi.',
+    paragraph2: 'Chỉ cần là chính mình — đã là đủ đẹp, đủ đáng trân trọng rồi.',
     thanksLine: 'vì đã mang đến sự ấm áp cho những người quanh mình.',
   },
   {
@@ -157,8 +151,7 @@ const PAGE_3_WISHES: Page3Wish[] = [
   {
     paragraph1:
       '20/10 — một ngày để mỉm cười với chính mình trước khi nhận lời chúc từ người khác. Đôi khi cái cười ấy mới là món quà quan trọng nhất.',
-    paragraph2:
-      'Chị đã đi được rất xa rồi. Hãy tự hào về điều đó — dù có lúc Chị quên mất.',
+    paragraph2: 'Chị đã đi được rất xa rồi. Hãy tự hào về điều đó — dù có lúc Chị quên mất.',
     thanksLine: 'vì đã luôn là phiên bản thật của chính mình.',
   },
   {
@@ -213,7 +206,11 @@ export const pickBySeed = <T>(items: readonly T[], seed: string, salt = ''): T =
     throw new Error('pickBySeed: empty list')
   }
   const index = hashSeed(`${seed}::${salt}`) % items.length
-  return items[index]!
+  const item = items[index]
+  if (item === undefined) {
+    throw new Error('pickBySeed: empty list')
+  }
+  return item
 }
 
 export const pickPage2Wish = (seed: string): Page2Wish => pickBySeed(PAGE_2_WISHES, seed, 'page2')
@@ -229,16 +226,17 @@ export const splitDisplayName = (
   if (parts.length === 0) {
     return { line1: honorific?.trim() || 'Chị', line2: 'Yêu quý' }
   }
-  if (parts.length === 1) {
+  const [first, second] = parts
+  if (parts.length === 1 && first) {
     return {
       line1: honorific?.trim() || 'Chị',
-      line2: parts[0]!,
+      line2: first,
     }
   }
-  if (parts.length === 2) {
+  if (parts.length === 2 && first && second) {
     return {
-      line1: [honorific, parts[0]].filter(Boolean).join(' '),
-      line2: parts[1]!,
+      line1: [honorific, first].filter(Boolean).join(' '),
+      line2: second,
     }
   }
   return {

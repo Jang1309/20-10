@@ -24,11 +24,11 @@ const Sheen = ({ className, delay = 0, repeatDelay, intensity = 0.45, maskSrc }:
     style={
       maskSrc
         ? {
-          maskImage: `url(${maskSrc})`,
-          maskSize: '100% 100%',
-          WebkitMaskImage: `url(${maskSrc})`,
-          WebkitMaskSize: '100% 100%',
-        }
+            maskImage: `url(${maskSrc})`,
+            maskSize: '100% 100%',
+            WebkitMaskImage: `url(${maskSrc})`,
+            WebkitMaskSize: '100% 100%',
+          }
         : undefined
     }
   >

@@ -23,15 +23,13 @@ export default async function OgImage({ params }: Params) {
   const [assets, fonts] = await Promise.all([getOgAssets(), getOgFonts()])
 
   return new ImageResponse(
-    (
-      <OgCard
-        who={who}
-        title={guest?.title ?? undefined}
-        partner={undefined}
-        big={Boolean(guest)}
-        assets={assets}
-      />
-    ),
+    <OgCard
+      who={who}
+      title={guest?.title ?? undefined}
+      partner={undefined}
+      big={Boolean(guest)}
+      assets={assets}
+    />,
     { ...size, fonts },
   )
 }

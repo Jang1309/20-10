@@ -71,10 +71,7 @@ function computeBookPageSize(): BookPageSize {
   // vượt quá khung nhìn (đã trừ padding ngang), nếu không react-pageflip đặt
   // inline-width lớn hơn màn hình và thiệp bị tràn / cắt ở mép.
   const horizontalGutterPx = viewportWidth < 1025 ? HORIZONTAL_GUTTER_COMPACT_REM * rootFontSize : 0
-  const maxWidthCapPx = Math.min(
-    24 * rootFontSize,
-    Math.max(1, viewportWidth - horizontalGutterPx),
-  )
+  const maxWidthCapPx = Math.min(24 * rootFontSize, Math.max(1, viewportWidth - horizontalGutterPx))
 
   // react-pageflip otherwise renders each page at a fixed 24×47rem regardless of
   // viewport height — on a short screen (small phone, or a browser chrome that eats

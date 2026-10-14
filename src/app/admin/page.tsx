@@ -136,11 +136,9 @@ const AdminPage = () => {
       for (let r = headerRowIndex + 1; r < matrix.length; r += 1) {
         const [guestLink, partnerGuestLink] = linksByRow.get(r) ?? []
         if (guestLink) {
-          XLSX.utils.sheet_add_aoa(
-            sheet,
-            [[guestLink, partnerGuestLink ?? '']],
-            { origin: { r, c: linkColIndex } },
-          )
+          XLSX.utils.sheet_add_aoa(sheet, [[guestLink, partnerGuestLink ?? '']], {
+            origin: { r, c: linkColIndex },
+          })
         }
       }
     }

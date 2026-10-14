@@ -58,11 +58,8 @@ const isPartnerRelation = (value: unknown): boolean => {
   return text.includes('phu nhan') || text.includes('phu quan')
 }
 
-const findColumn = (
-  row: unknown[],
-  test: (header: string) => boolean,
-  start = 0,
-): number => row.findIndex((cell, index) => index >= start && test(normalizeHeader(cell)))
+const findColumn = (row: unknown[], test: (header: string) => boolean, start = 0): number =>
+  row.findIndex((cell, index) => index >= start && test(normalizeHeader(cell)))
 
 type FamilyColumns = {
   staffName: number
@@ -122,9 +119,7 @@ export const looksLikePersonName = (name: string): boolean => {
   }
 
   const hasVietDiacritic =
-    /[àáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]/i.test(
-      trimmed,
-    )
+    /[àáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]/i.test(trimmed)
   const words = trimmed.split(/\s+/).filter(Boolean)
   if (words.length < 2 && !hasVietDiacritic) return false
 
