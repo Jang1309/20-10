@@ -1,0 +1,42 @@
+// Prisma + PostgreSQL (Neon). Chạy `npx prisma migrate dev` để tạo bảng.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/// Danh sách người nhận thiệp 20/10 + link, nạp từ file Excel qua trang admin.
+model Guest {
+  guestId    String   @id
+  slug       String?  @unique
+  stt        Int
+  category   String?
+  name       String
+  honorific  String?
+  title      String?
+  unit       String?
+  department String?
+  partner    String?
+  /// Ảnh chân dung hiển thị ở trang 3 của thiệp (URL), để trống thì dùng thiết kế mặc định.
+  avatarUrl  String?
+  link       String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+/// Ảnh chân dung upload từ admin, lưu thẳng trong DB (đã thu nhỏ ở trình duyệt).
+/// slot 1 = ảnh bìa (trang 1), slot 2 = ảnh trang 3. Không gắn khoá ngoại để ảnh
+/// không mất khi nạp lại danh sách (guestId là mã băm cố định theo thông tin khách).
+model GuestPhoto {
+  guestId   String
+  slot      Int
+  mime      String
+  data      Bytes
+  updatedAt DateTime @updatedAt
+
+  @@id([guestId, slot])
+}
