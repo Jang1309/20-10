@@ -11,7 +11,10 @@ export const ORG_NAME = 'Tập đoàn Bateco'
 export const EVENT_NAME = 'Chúc mừng ngày Phụ nữ Việt Nam 20/10'
 export const EVENT_WHEN = '20/10'
 export const EVENT_VENUE = 'Bateco Group'
+export const SHARE_TITLE = 'Thiệp chúc 20/10'
+export const OG_ALT = `${SHARE_TITLE} · ${ORG_NAME}`
+export const SHARE_WHO_FALLBACK = 'Thân gửi'
 
 /** Câu mô tả chung, chèn tên khách nếu có. */
 export const inviteDescription = (guestLine?: string) =>
-  `${ORG_NAME} xin gửi đến ${guestLine ?? 'Chị'} lời chúc mừng chân thành nhân ${EVENT_NAME}.`
+  `${ORG_NAME} xin gửi đến ${guestLine ?? 'Chị'} lời chúc mừng chân thành nhân Ngày Phụ nữ Việt Nam 20/10.`

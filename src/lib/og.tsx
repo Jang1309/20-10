@@ -62,14 +62,14 @@ export const getOgFonts = () => {
 
 export const getOgAssets = () => {
   assetsPromise ??= Promise.all([
-    readAsset('bg-new.png', 'image/png'),
+    readAsset('bg-20-10.png', 'image/png'),
     readAsset('title.png', 'image/png'),
   ]).then(([background, invite]) => ({ background, invite }))
 
   return assetsPromise
 }
 
-/** Khung thiệp mời cho ảnh chia sẻ (Open Graph). */
+/** Khung ảnh chia sẻ (Open Graph) cho thiệp chúc 20/10. */
 export const OgCard = ({ who, title, partner, big = true, assets }: CardProps) => (
   <div
     style={{
@@ -81,8 +81,8 @@ export const OgCard = ({ who, title, partner, big = true, assets }: CardProps) =
       position: 'relative',
       padding: 52,
       fontFamily: 'Noto Sans',
-      color: '#f8f1e4',
-      background: '#04162d',
+      color: '#fff7f4',
+      background: '#f6dde3',
     }}
   >
     <img
@@ -103,9 +103,12 @@ export const OgCard = ({ who, title, partner, big = true, assets }: CardProps) =
     <div
       style={{
         position: 'absolute',
-        inset: 0,
+        top: 0,
+        left: 0,
+        width: 1200,
+        height: 630,
         background:
-          'linear-gradient(90deg, rgba(4,22,45,0.12) 0%, rgba(4,22,45,0.45) 55%, rgba(4,22,45,0.92) 100%)',
+          'linear-gradient(90deg, rgba(255,236,240,0.08) 0%, rgba(122,42,58,0.55) 46%, rgba(74,18,32,0.88) 100%)',
       }}
     />
     <div
@@ -167,7 +170,7 @@ export const OgCard = ({ who, title, partner, big = true, assets }: CardProps) =
           paddingRight: 18,
         }}
       >
-        <div style={{ fontSize: 28, color: '#d2b26e', fontWeight: 700 }}>THIỆP MỜI</div>
+        <div style={{ fontSize: 28, color: '#f3d58a', fontWeight: 700 }}>THIỆP CHÚC</div>
         <div
           style={{
             marginTop: 18,
@@ -183,7 +186,7 @@ export const OgCard = ({ who, title, partner, big = true, assets }: CardProps) =
           <div style={{ marginTop: 4, fontSize: 28, color: '#f3d58a' }}>{partner}</div>
         ) : null}
         {title ? (
-          <div style={{ marginTop: 12, fontSize: 25, color: '#dbe6f4', lineHeight: 1.35 }}>
+          <div style={{ marginTop: 12, fontSize: 25, color: '#fff7f4', lineHeight: 1.35 }}>
             {title}
           </div>
         ) : null}
@@ -209,8 +212,8 @@ export const OgCard = ({ who, title, partner, big = true, assets }: CardProps) =
           {EVENT_NAME}
         </div>
         <div style={{ marginTop: 24, fontSize: 26, color: '#d2b26e' }}>{EVENT_WHEN}</div>
-        <div style={{ marginTop: 8, fontSize: 24, color: '#dbe6f4' }}>{EVENT_VENUE}</div>
-        <div style={{ marginTop: 30, fontSize: 19, color: 'rgba(247,240,223,0.64)' }}>
+        <div style={{ marginTop: 8, fontSize: 24, color: '#fff7f4' }}>{EVENT_VENUE}</div>
+        <div style={{ marginTop: 30, fontSize: 19, color: 'rgba(255,247,244,0.82)' }}>
           {ORG_NAME.toUpperCase()}
         </div>
       </div>

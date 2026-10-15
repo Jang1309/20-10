@@ -5,7 +5,7 @@ import { Toaster } from 'sonner'
 
 import { LenisProvider } from '@/components/providers/lenis-provider'
 import { QueryProvider } from '@/components/providers/query-provider'
-import { EVENT_NAME, ORG_NAME, SITE_URL, inviteDescription } from '@/lib/site'
+import { ORG_NAME, SHARE_TITLE, SITE_URL, inviteDescription } from '@/lib/site'
 
 import '@/styles/globals.css'
 
@@ -43,26 +43,26 @@ const description = inviteDescription()
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `Thiệp mời · ${EVENT_NAME}`,
+    default: `${SHARE_TITLE} · ${ORG_NAME}`,
     template: `%s · ${ORG_NAME}`,
   },
   description,
-  applicationName: 'Thiệp mời Bateco',
-  keywords: ['Bateco', 'thiệp mời', 'lễ kỷ niệm 14 năm', 'Tập đoàn Bateco'],
+  applicationName: SHARE_TITLE,
+  keywords: ['Bateco', 'thiệp chúc', '20/10', 'Ngày Phụ nữ Việt Nam', ORG_NAME],
   authors: [{ name: ORG_NAME }],
-  // Trang thiệp mời riêng tư (URL chứa tên khách) — không cho công cụ tìm kiếm lập chỉ mục.
+  // URL có tên khách — không cho công cụ tìm kiếm lập chỉ mục.
   robots: { index: false, follow: false, nocache: true },
   openGraph: {
     type: 'website',
     siteName: ORG_NAME,
     locale: 'vi_VN',
     url: SITE_URL,
-    title: `Thiệp mời · ${EVENT_NAME}`,
+    title: `${SHARE_TITLE} · ${ORG_NAME}`,
     description,
   },
   twitter: {
     card: 'summary_large_image',
-    title: `Thiệp mời · ${EVENT_NAME}`,
+    title: `${SHARE_TITLE} · ${ORG_NAME}`,
     description,
   },
   formatDetection: { telephone: false, email: false, address: false },

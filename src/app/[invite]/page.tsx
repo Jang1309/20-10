@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation'
 import InvitationFlipbook from '@/app/_components/invitation-flipbook'
 import { type Guest, photoUrl } from '@/lib/guest'
 import { prisma } from '@/lib/prisma'
-import { EVENT_NAME, inviteDescription } from '@/lib/site'
+import { SHARE_TITLE, inviteDescription } from '@/lib/site'
 
 export const dynamic = 'force-dynamic'
 
@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: InvitePageProps): Promise<Met
   if (!g) return { title: 'Không tìm thấy thiệp', robots: { index: false, follow: false } }
 
   const who = [g.honorific, g.name].filter(Boolean).join(' ')
-  const title = `Thiệp 20/10 · ${who}`
+  const title = `${SHARE_TITLE} · ${who}`
   const description = inviteDescription(guestLine(g))
 
   return {
@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: InvitePageProps): Promise<Met
     alternates: { canonical: `/${invite}` },
     openGraph: {
       type: 'website',
-      title: `${title} · ${EVENT_NAME}`,
+      title,
       description,
       url: `/${invite}`,
     },

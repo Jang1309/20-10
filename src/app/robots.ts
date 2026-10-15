@@ -1,12 +1,27 @@
 import type { MetadataRoute } from 'next'
 
-/** Microsite thiệp mời riêng tư — không cho bot lập chỉ mục trang nào. */
+const SHARE_BOTS = [
+  'facebookexternalhit',
+  'Facebot',
+  'Twitterbot',
+  'LinkedInBot',
+  'WhatsApp',
+  'TelegramBot',
+  'Slackbot',
+  'Discordbot',
+  'Zalo',
+  'ZaloBot',
+  'Viber',
+]
+
+/** Trang thiệp có tên khách: bot tìm kiếm không vào. Bot xem trước link (Zalo, Facebook, …) được đọc thẻ chia sẻ, trừ admin/api. */
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       {
-        userAgent: ['facebookexternalhit', 'Facebot'],
+        userAgent: SHARE_BOTS,
         allow: '/',
+        disallow: ['/admin', '/api/', '/preview-avatar'],
       },
       {
         userAgent: '*',
