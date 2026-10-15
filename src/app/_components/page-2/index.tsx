@@ -3,6 +3,7 @@
 import { HeartIcon } from 'lucide-react'
 import { motion } from 'motion/react'
 import Image from 'next/image'
+import { useState } from 'react'
 
 import {
   useIsPageVisible,
@@ -10,7 +11,16 @@ import {
 } from '@/app/_components/invitation-flipbook/active-page-context'
 import { useGuest, useWishSeed } from '@/app/_components/invitation-flipbook/guest-context'
 import SpineShadow from '@/app/_components/invitation-flipbook/spine-shadow'
-import { fadeIn, fadeUp, lineExpand, pageStagger, writeIn } from '@/lib/animations'
+import {
+  fadeIn,
+  fadeUp,
+  heartPop,
+  inkMaskStyle,
+  inkWrite,
+  lineExpand,
+  pageStagger,
+  writeIn,
+} from '@/lib/animations'
 import { pickPage2Wish, splitDisplayName } from '@/lib/wishes-20-10'
 
 const GoldDivider = ({ className }: { className?: string }) => (
@@ -33,6 +43,7 @@ const Page2 = () => {
   const wish = pickPage2Wish(useWishSeed())
   const { line1, line2 } = splitDisplayName(guest?.honorific || 'Chị', guest?.name || 'Yêu quý')
   const revealed = useRevealOnce(useIsPageVisible(1))
+  const [signed, setSigned] = useState(false)
 
   return (
     <section className='relative h-full w-full overflow-hidden bg-[#f6dde3] pointer-events-auto'>
@@ -94,7 +105,11 @@ const Page2 = () => {
             </motion.span>
           </h2>
 
-          <motion.div variants={writeIn}>
+          <motion.div
+            variants={inkWrite}
+            custom={2}
+            style={inkMaskStyle}
+          >
             <Image
               src='/heart.png'
               alt=''
@@ -109,7 +124,7 @@ const Page2 = () => {
 
         <GoldDivider className='mt-5' />
 
-        <div className='mt-4 space-y-2 font-lora text-[0.75rem] leading-[1.65] px-[2.5rem] text-center text-[#4f272c]'>
+        <div className='mt-4 space-y-2 text-pretty font-lora text-[0.75rem] leading-[1.65] px-[2.5rem] text-center text-[#4f272c]'>
           <motion.p variants={fadeUp}>{wish.intro}</motion.p>
           <motion.p variants={fadeUp}>{wish.body}</motion.p>
         </div>
@@ -118,7 +133,7 @@ const Page2 = () => {
 
         <motion.p
           variants={fadeUp}
-          className='mt-3 text-center font-lora text-[0.95rem] leading-[1.55] px-[3rem] font-semibold italic text-[#D92F45]'
+          className='mt-3 text-balance text-center font-lora text-[0.95rem] leading-[1.55] px-[3rem] font-semibold italic text-[#D92F45]'
         >
           {wish.closing}
         </motion.p>
@@ -131,15 +146,25 @@ const Page2 = () => {
           >
             Thân ái,
           </motion.p>
-          <motion.div
-            variants={writeIn}
-            className='mt-1.5 flex items-center gap-1.5'
-          >
-            <span className='font-great-vibes text-[1.85rem] leading-[1.15] text-[#D92F45]'>
+          <div className='mt-1.5 flex items-center gap-1.5'>
+            {/* Padding âm-dương để nét lượn của font không bị mặt nạ cắt mất. */}
+            <motion.span
+              variants={inkWrite}
+              onAnimationComplete={(definition) => definition === 'show' && setSigned(true)}
+              style={inkMaskStyle}
+              className='-mx-3 -my-1.5 inline-block px-3 py-1.5 font-great-vibes text-[1.85rem] leading-[1.15] text-[#D92F45]'
+            >
               Bateco Group
-            </span>
-            <HeartIcon className='size-[0.7rem] translate-y-1 fill-[#D92F45] text-[#D92F45]' />
-          </motion.div>
+            </motion.span>
+            <motion.span
+              variants={heartPop}
+              initial='hidden'
+              animate={signed ? 'show' : 'hidden'}
+              className='relative top-1 inline-flex'
+            >
+              <HeartIcon className='size-[0.7rem] fill-[#D92F45] text-[#D92F45]' />
+            </motion.span>
+          </div>
         </div>
       </motion.div>
       <SpineShadow side='right' />

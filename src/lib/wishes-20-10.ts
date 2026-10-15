@@ -17,177 +17,158 @@ export type Page3Wish = {
 
 const PAGE_2_WISHES: Page2Wish[] = [
   {
-    intro: 'Nhân ngày 20/10, Bateco Group xin gửi đến Chị lời chúc thật chân thành và ấm áp.',
-    body: 'Cảm ơn Chị đã luôn cố gắng mỗi ngày, vừa làm việc chỉn chu vừa mang lại không khí dễ chịu cho mọi người xung quanh. Những điều đó có vẻ nhỏ, nhưng lại khiến cả tập thể thấy ấm hơn rất nhiều.',
-    closing:
-      'Chúc Chị ngày 20/10 vui vẻ, được nghỉ ngơi đúng lúc và được quan tâm nhiều hơn một chút — không chỉ hôm nay mà cả những ngày thường!',
+    intro: 'Tháng Mười dịu dàng gõ cửa, Bateco Group gửi đến Chị lời chúc 20/10 thật ấm áp.',
+    body: 'Giữa bộn bề công việc, Chị vẫn luôn giữ cho mọi thứ ngăn nắp, chu toàn và ấm áp. Sự chỉn chu ấy, nụ cười ấy đã trở thành điều cả tập thể Bateco vô cùng trân quý.',
+    closing: 'Chúc Chị luôn rạng rỡ như nắng thu, bình yên như những sớm mai.',
   },
   {
-    intro: 'Chúc mừng ngày Phụ nữ Việt Nam 20/10!',
-    body: 'Bateco Group cảm ơn Chị vì sự tận tâm trong công việc. Có Chị, mọi việc trở nên nhẹ nhàng và đáng tin cậy hơn rất nhiều — đó là điều cả team đều cảm nhận được.',
-    closing:
-      'Chúc Chị luôn khỏe, luôn vui, và có thật nhiều khoảnh khắc đáng nhớ bên những người thương quý.',
+    intro:
+      'Chúc mừng ngày Phụ nữ Việt Nam 20/10! Bateco Group gửi đến Chị lời chúc chân thành nhất.',
+    body: 'Có những người không cần nói nhiều, chỉ cần có mặt là mọi việc đã thấy vững vàng hơn. Ở Bateco, Chị chính là người như thế: lặng lẽ, tận tâm và luôn đáng tin cậy.',
+    closing: 'Chúc Chị hôm nay hoa vây quanh, quà gõ cửa, yêu thương đong đầy.',
   },
   {
-    intro: 'Nhân dịp 20/10, cả tập thể Bateco xin gửi lời chúc ấm áp tới Chị.',
-    body: 'Cảm ơn Chị đã đồng hành cùng mọi người suốt thời gian qua. Những đóng góp của Chị không cần nói nhiều — ai cũng thấy, và ai cũng trân trọng.',
-    closing:
-      'Chúc Chị một ngày thật dễ chịu, làm gì cũng thấy vui, và được dành chút thời gian cho chính mình!',
+    intro: 'Nhân ngày 20/10, cả nhà Bateco xin gửi tặng Chị một bó lời chúc thật xinh.',
+    body: 'Cảm ơn Chị vì những ngày tận tâm, những lần sẵn lòng sẻ chia và cả những nụ cười tiếp sức giữa ngày bận rộn. Chị đã viết nên một trang rất đẹp trong câu chuyện Bateco.',
+    closing: 'Chúc Chị luôn xinh đẹp, khỏe mạnh, mỗi sớm mai đều có lý do để cười.',
   },
   {
-    intro: 'Ngày 20/10 này, Bateco Group xin chúc Chị thật nhiều điều tốt đẹp.',
-    body: 'Cảm ơn Chị vì lúc nào cũng chu đáo và sẵn sàng hỗ trợ. Có những việc nhỏ nhưng lại tạo nên sự khác biệt lớn trong tập thể — và Chị đang làm đúng những việc đó mỗi ngày.',
-    closing:
-      'Chúc Chị được yêu thương, được lắng nghe, và được là chính mình một cách thoải mái nhất.',
+    intro: 'Gửi Chị — một đóa hoa đẹp trong khu vườn Bateco, nhân ngày Phụ nữ Việt Nam 20/10.',
+    body: 'Sự chu đáo của Chị nằm trong những điều rất nhỏ: một lời nhắc kịp lúc, một việc làm trọn vẹn, một câu hỏi han giữa ngày mệt mỏi. Chính những điều nhỏ ấy làm nên khác biệt lớn.',
+    closing: 'Chúc Chị được nâng niu dịu dàng, như cách Chị vẫn quan tâm mọi người.',
   },
   {
-    intro: 'Bateco Group xin gửi lời chúc 20/10 đến Chị — chân thành và gần gũi.',
-    body: 'Cảm ơn Chị đã góp phần tạo nên một môi trường làm việc tử tế. Sự hiện diện của Chị khiến mọi người thấy gần nhau hơn, và công việc cũng dễ thở hơn.',
-    closing:
-      'Chúc Chị ngày lễ vui vẻ, có thật nhiều niềm vui bất ngờ, và được nghỉ một chút giữa những ngày bận rộn!',
+    intro: 'Bateco Group trân trọng gửi đến Chị lời chúc mừng ngày Phụ nữ Việt Nam 20/10.',
+    body: 'Một nơi làm việc tử tế không tự nhiên mà có. Nó được vun lên từ những con người như Chị: chân thành, trách nhiệm, và luôn nghĩ cho người khác trước khi nghĩ cho mình.',
+    closing: 'Chúc Chị một ngày nhiều niềm vui, nhiều bất ngờ và thật ít deadline!',
   },
   {
-    intro: 'Nhân ngày tôn vinh phụ nữ Việt Nam, xin gửi tới Chị lời chúc từ Bateco Group.',
-    body: 'Cảm ơn Chị vì sự chịu khó và tinh thần trách nhiệm. Những điều đó không ồn ào, không cần khoe ra, nhưng lại rất đáng quý với những người làm việc cùng Chị.',
-    closing: 'Chúc Chị luôn bình yên, được đối xử thật tốt mỗi ngày, và giữ được nụ cười của mình.',
+    intro: 'Nhân ngày tôn vinh phụ nữ Việt Nam, Bateco Group xin gửi đến Chị lời tri ân sâu sắc.',
+    body: 'Sự bền bỉ của Chị giống như dòng nước: lặng lẽ, không ồn ào, nhưng luôn nuôi dưỡng và nâng đỡ những người đi cùng. Bateco may mắn vì có Chị trên hành trình này.',
+    closing: 'Chúc Chị lòng luôn an yên, công việc hanh thông, gia đình đầy tiếng cười.',
   },
   {
-    intro: 'Chúc Chị ngày 20/10 thật vui và thật nhẹ nhàng!',
-    body: 'Bateco Group cảm ơn Chị đã luôn cố gắng hết mình. Công việc có lúc áp lực, nhưng Chị vẫn giữ được sự tận tâm — điều đó rất đáng trân trọng, và mọi người đều thấy.',
-    closing:
-      'Chúc Chị được nghỉ một chút, cười nhiều hơn, và thấy mình được nâng đỡ đúng lúc cần nhất.',
+    intro: 'Chúc Chị một ngày 20/10 ngọt ngào như hương hoa sữa đầu mùa thu!',
+    body: 'Có những lúc công việc dồn dập như mưa, vậy mà Chị vẫn giữ được sự điềm tĩnh và tận tâm hiếm có. Bateco thật tự hào vì có Chị cùng đi trên chặng đường này.',
+    closing: 'Hôm nay, Chị cứ nghỉ ngơi, được chiều chuộng và làm “nữ chính” nhé!',
   },
   {
-    intro: 'Nhân 20/10, Bateco Group xin gửi đến Chị lời cảm ơn chân thành.',
-    body: 'Cảm ơn Chị vì đã ở đây, vì đã làm tốt phần việc của mình, và vì đã làm cho tập thể dễ thở hơn chỉ bằng cách luôn sẵn sàng giúp đỡ.',
-    closing:
-      'Chúc Chị một ngày đặc biệt đúng như tên gọi của nó — đặc biệt với chính Chị, theo cách Chị muốn.',
+    intro: 'Nhân dịp 20/10, Bateco Group xin gửi đến Chị lời cảm ơn từ tận trái tim.',
+    body: 'Cảm ơn Chị vì đã ở đây, đã cống hiến hết mình và luôn lan tỏa năng lượng tích cực, kể cả trong những ngày chẳng mấy dễ dàng. Có Chị, cả team như được tiếp thêm lửa.',
+    closing: 'Chúc Chị luôn tươi tắn như những đóa hoa hôm nay Chị được nhận!',
   },
   {
-    intro: 'Ngày Phụ nữ Việt Nam 20/10, xin chúc Chị thật nhiều sức khỏe và niềm vui.',
-    body: 'Bateco Group trân trọng sự đồng hành của Chị. Có những ngày bận rộn, nhưng nhờ có Chị mà mọi thứ vẫn đi đúng hướng — và cả team đều biết ơn vì điều đó.',
-    closing:
-      'Chúc Chị được quan tâm nhiều hơn, không chỉ hôm nay mà cả những ngày thường xuyên nhất.',
+    intro: 'Ngày Phụ nữ Việt Nam 20/10, chúc Chị vạn sự an lành, niềm vui trọn vẹn.',
+    body: 'Bateco Group trân trọng từng dấu ấn Chị để lại. Nhờ có Chị, nhiều việc khó trở nên suôn sẻ, và cả team luôn vững tâm bước về phía trước, dù đường dài hay ngắn.',
+    closing: 'Chúc Chị gặt hái thêm nhiều thành công và luôn được yêu thương.',
   },
   {
-    intro: 'Bateco Group xin chúc mừng Chị nhân ngày 20/10.',
-    body: 'Cảm ơn Chị đã mang đến sự chỉn chu trong công việc. Đó là thứ không phải ai cũng làm được mỗi ngày — và vì thế nó càng đáng được ghi nhận.',
-    closing:
-      'Chúc Chị vui vẻ, thoải mái, và có một ngày 20/10 đáng nhớ bên những điều giản dị nhưng ấm áp!',
+    intro: 'Bateco Group xin gửi lời chúc mừng thật ấm áp đến Chị nhân ngày 20/10.',
+    body: 'Sự chỉn chu không phải ai cũng giữ được mỗi ngày, vậy mà Chị làm được, bền bỉ và lặng lẽ như một thói quen đẹp. Điều đó thật đáng ngưỡng mộ và đáng được ghi nhận.',
+    closing: 'Chúc Chị một ngày 20/10 thật đáng nhớ bên những người Chị thương yêu.',
   },
   {
-    intro: 'Nhân dịp 20/10, xin gửi tới Chị lời chúc từ cả nhà Bateco.',
-    body: 'Cảm ơn Chị vì đã luôn ở đó khi cần. Những hỗ trợ của Chị có khi chẳng ai nói ra thành lời, nhưng mọi người đều nhớ — và đều cảm ơn theo cách riêng của mình.',
-    closing: 'Chúc Chị được hạnh phúc theo cách đơn giản và thật nhất, không cần gì lớn lao.',
+    intro: 'Nhân dịp 20/10, cả nhà Bateco xin gửi đến Chị muôn vàn yêu thương.',
+    body: 'Mỗi khi cần, Chị luôn ở đó, sẵn lòng giúp đỡ mà chẳng đợi ai nhờ đến lần hai. Những điều ấy có khi chẳng ai nói thành lời, nhưng mọi người đều nhớ và thầm cảm ơn Chị.',
+    closing: 'Chúc Chị hạnh phúc theo cách giản dị và chân thật nhất, như chính Chị.',
   },
   {
-    intro: 'Ngày 20/10 đến rồi — Bateco Group xin chúc Chị một ngày thật ấm.',
-    body: 'Cảm ơn Chị đã góp công sức cho tập thể. Không cần lời hoa mỹ, chỉ cần nói rằng: có Chị là tốt hơn rất nhiều, và mọi người đều cảm nhận được điều đó.',
-    closing:
-      'Chúc Chị cười nhiều, lo ít, và được chiều chuộng đúng lúc cần — hôm nay và cả sau này.',
+    intro: '20/10 đã về, Bateco Group xin gửi đến Chị một lời chúc thật ấm áp.',
+    body: 'Không cần lời hoa mỹ, chỉ xin nói một điều thật lòng: có Chị trong đội ngũ, Bateco đẹp hơn, ấm hơn và vững vàng hơn rất nhiều. Cảm ơn Chị đã luôn đồng hành.',
+    closing: 'Chúc Chị cười nhiều hơn, bớt âu lo và luôn có người chở che khi cần.',
   },
   {
-    intro: 'Xin chúc Chị ngày Phụ nữ Việt Nam vui vẻ và ấm áp!',
-    body: 'Bateco Group cảm ơn Chị vì sự chịu khó và thái độ làm việc tốt. Đó là điều giúp cả team tiến lên mỗi ngày, dù đôi khi chẳng ai kịp nói lời cảm ơn.',
-    closing:
-      'Chúc Chị luôn được đối xử tử tế — vì Chị cũng đang sống tử tế như thế với mọi người xung quanh.',
+    intro: 'Chúc Chị ngày Phụ nữ Việt Nam thật vui, thật ý nghĩa và thật nhiều yêu thương!',
+    body: 'Sự tận tụy và tinh thần cầu tiến của Chị như một ngọn lửa nhỏ: đủ ấm để truyền cảm hứng, đủ sáng để cả tập thể Bateco cùng nhau tiến bước mỗi ngày.',
+    closing: 'Chúc Chị luôn được đối xử dịu dàng, như cách Chị dịu dàng với cả thế giới.',
   },
   {
-    intro: 'Nhân 20/10, Bateco Group xin gửi lời chúc đến Chị.',
-    body: 'Cảm ơn Chị đã làm việc trách nhiệm và mang lại sự tin cậy cho mọi người. Có Chị trong team là một điều may — và cả tập thể đều biết điều đó.',
-    closing:
-      'Chúc Chị khỏe mạnh, vui vẻ, và được yêu thương nhiều hơn một chút hôm nay cũng như những ngày tới!',
+    intro: 'Nhân ngày 20/10, Bateco Group trân trọng gửi lời chúc mừng đến Chị.',
+    body: 'Niềm tin là món quà quý giá nhất trong một tập thể, và Chị đã trao món quà ấy cho mọi người qua từng việc nhỏ mình làm mỗi ngày, bằng sự trách nhiệm và chân thành.',
+    closing: 'Chúc Chị luôn khỏe mạnh, rạng ngời và mọi điều ước đều nở hoa!',
   },
   {
-    intro: 'Chúc mừng 20/10 từ Bateco Group!',
-    body: 'Cảm ơn Chị vì đã luôn cố gắng. Dù việc lớn hay việc nhỏ, Chị đều làm với sự tận tâm — và điều đó rất đáng được ghi nhận, không chỉ nhân ngày lễ.',
-    closing:
-      'Chúc Chị một ngày nhẹ nhàng, đầy hoa, và thật nhiều lời cảm ơn chân thành từ những người quanh mình.',
+    intro: 'Chúc mừng 20/10! Bateco Group gửi đến Chị những lời chúc tốt đẹp nhất.',
+    body: 'Dù là việc lớn hay việc nhỏ, Chị đều đặt vào đó trọn vẹn sự tận tâm. Hôm nay là dịp để cả nhà Bateco nói thật to điều vẫn luôn muốn nói: cảm ơn Chị rất nhiều!',
+    closing: 'Chúc Chị một ngày ngập tràn hoa tươi, quà xinh và nụ cười rạng rỡ.',
   },
 ]
 
 const PAGE_3_WISHES: Page3Wish[] = [
   {
     paragraph1:
-      '20/10 không chỉ là ngày nhận hoa hay lời chúc. Đó còn là lúc để mỗi người phụ nữ nhớ rằng mình cũng cần được quan tâm — không kém gì những người mình vẫn đang chăm sóc mỗi ngày.',
+      '20/10 không chỉ là ngày của hoa và quà. Đó là ngày để người phụ nữ nhớ rằng mình cũng xứng đáng được chăm sóc, như cách mình vẫn lặng lẽ chăm sóc mọi người.',
     paragraph2:
-      'Hãy cho phép bản thân chậm lại một chút — cười nhiều hơn, lo lắng ít hơn, và dành chút thời gian chỉ cho riêng mình.',
-    thanksLine: 'vì đã luôn cố gắng theo cách rất riêng của mình.',
+      'Hãy chậm lại một nhịp, cười nhiều hơn một chút và dành cho mình một khoảng trời riêng.',
+    thanksLine: 'vì Chị đã luôn cố gắng theo cách rất riêng của mình.',
   },
   {
     paragraph1:
-      'Ngày 20/10 này, xin nhắc Chị một điều giản dị: Chị không cần hoàn hảo mới xứng đáng được yêu thương. Chị đã đủ tốt rồi — chỉ cần được nhìn thấy đúng cách.',
-    paragraph2: 'Chỉ cần là chính mình — đã là đủ đẹp, đủ đáng trân trọng rồi.',
-    thanksLine: 'vì đã mang đến sự ấm áp cho những người quanh mình.',
+      'Hoa không cần rực rỡ nhất mới được yêu. Chị cũng vậy: không cần hoàn hảo, chỉ cần là chính mình đã đủ đặc biệt và đủ đáng trân trọng rồi.',
+    paragraph2: 'Mong Chị luôn tự tin bước đi trên con đường mình chọn, với một trái tim nhẹ tênh.',
+    thanksLine: 'vì Chị đã mang hơi ấm đến cho những người xung quanh.',
   },
   {
     paragraph1:
-      'Phụ nữ đẹp không phải vì lúc nào cũng mạnh mẽ. Đôi khi đẹp vì dám mệt, dám nghỉ, rồi lại đứng dậy — và vẫn giữ được sự dịu dàng ấy.',
+      'Phụ nữ đẹp nhất không phải lúc nào cũng mạnh mẽ, mà là khi dám mệt, dám nghỉ, rồi lại đứng lên với sự dịu dàng vẹn nguyên như thuở ban đầu.',
+    paragraph2: 'Chúc Chị giữ mãi sự dịu dàng ấy, với mọi người và trước hết là với chính mình.',
+    thanksLine: 'vì Chị đã làm mọi thứ dịu lại chỉ bằng sự hiện diện.',
+  },
+  {
+    paragraph1:
+      'Có những lời cảm ơn cất giữ mãi trong lòng, đến 20/10 mới có dịp nói ra. Không hoa mỹ, không dài dòng, chỉ thật lòng thôi.',
     paragraph2:
-      'Chúc Chị giữ được sự dịu dàng đó — với người khác, và quan trọng hơn, với chính mình.',
-    thanksLine: 'vì đã làm mọi thứ trở nên dễ chịu hơn chỉ bằng cách có mặt.',
+      'Cảm ơn Chị vì đã sống tử tế, bền bỉ nỗ lực và gieo những điều tốt đẹp theo cách của riêng mình.',
+    thanksLine: 'vì Chị đã chọn sống đẹp mỗi ngày, dù chẳng ai nhắc.',
   },
   {
     paragraph1:
-      '20/10 là dịp đẹp để nói lời cảm ơn — không hoa mỹ, không dài dòng, chỉ thật lòng thôi.',
+      'Có những ngày Chị phải gồng lên thật nhiều, cười cả khi lòng mỏi mệt. 20/10 này, hãy tạm đặt gánh nặng xuống, dù chỉ một buổi sáng thôi.',
+    paragraph2: 'Chị xứng đáng được nghỉ ngơi, được lắng nghe và được yêu thương thật trọn vẹn.',
+    thanksLine: 'vì Chị đã luôn nỗ lực hết mình một cách thật đẹp.',
+  },
+  {
+    paragraph1:
+      'Vẻ đẹp của người phụ nữ không nằm ở việc gánh vác được tất cả, mà ở chỗ biết mình là ai và vẫn đủ mềm mại để yêu thương.',
+    paragraph2: 'Chúc Chị giữ được điều quý giá ấy, hôm nay và cả những ngày bình thường nhất.',
+    thanksLine: 'vì Chị đã khiến thế giới quanh mình dịu dàng hơn.',
+  },
+  {
+    paragraph1:
+      '20/10, hãy mỉm cười với chính mình trước khi nhận lời chúc từ bất kỳ ai. Nụ cười thật đẹp ấy là món quà đầu tiên Chị dành cho bản thân.',
+    paragraph2: 'Chị đã đi một chặng đường dài và đẹp. Hãy tự hào về điều đó, Chị nhé!',
+    thanksLine: 'vì Chị đã luôn là phiên bản chân thật nhất của mình.',
+  },
+  {
+    paragraph1:
+      'Chị không cần đợi đến 20/10 mới được trân trọng. Chỉ là hôm nay, cả nhà Bateco muốn nói điều đó thành lời, thật rõ ràng và không ngại ngùng.',
+    paragraph2: 'Chúc Chị luôn được lắng nghe, được thấu hiểu và nhận về những gì mình xứng đáng.',
+    thanksLine: 'vì Chị đã thắp lên năng lượng tích cực cho cả tập thể.',
+  },
+  {
+    paragraph1:
+      'Ngày Phụ nữ Việt Nam là lời tri ân gửi đến sự dịu dàng, những hy sinh thầm lặng và cả những lúc Chị phải thật mạnh mẽ dù chẳng ai nhìn thấy.',
+    paragraph2: 'Hãy nhớ yêu thương bản thân nhiều như cách Chị vẫn yêu thương mọi người mỗi ngày.',
+    thanksLine: 'vì Chị đã sống tử tế và tận tâm theo cách riêng.',
+  },
+  {
+    paragraph1:
+      '20/10 này, chỉ mong Chị một điều giản dị: được vui theo cách mình muốn, được sống theo nhịp của riêng mình, như một đóa hoa nở đúng mùa.',
+    paragraph2: 'Không cần gồng, không cần hoàn hảo, chỉ cần hạnh phúc là đủ.',
+    thanksLine: 'vì Chị đã mang đến một sắc màu rất riêng cho Bateco.',
+  },
+  {
+    paragraph1:
+      'Đôi khi công việc cuốn ta đi nhanh đến mức quên rằng mình cũng cần được nâng niu. 20/10 là lời nhắc khẽ khàng cho điều ấy.',
+    paragraph2: 'Chị quan trọng hơn Chị nghĩ, và xứng đáng được đối xử thật tốt mỗi ngày.',
+    thanksLine: 'vì Chị đã luôn là một người đồng nghiệp tuyệt vời.',
+  },
+  {
+    paragraph1:
+      'Nhân 20/10, chúc Chị giữ mãi nụ cười thật đẹp, thứ khiến mọi người thấy nhẹ lòng mỗi khi gặp Chị, kể cả trong những ngày mệt mỏi nhất.',
     paragraph2:
-      'Cảm ơn vì Chị đã sống tử tế, đã cố gắng, và đã mang lại điều tốt cho những người xung quanh theo cách rất riêng của Chị.',
-    thanksLine: 'vì đã chọn sống tốt mỗi ngày, dù không ai nhắc.',
-  },
-  {
-    paragraph1:
-      'Có những ngày Chị phải gồng lên rất nhiều. 20/10 này, xin hãy đặt gánh nặng xuống một lúc — dù chỉ là một buổi sáng hay một buổi chiều.',
-    paragraph2:
-      'Chị xứng đáng được nghỉ ngơi — và được nói rằng mình cũng cần được chăm sóc, không chỉ chăm sóc người khác.',
-    thanksLine: 'vì đã cố gắng hết mình theo cách rất đẹp.',
-  },
-  {
-    paragraph1:
-      'Vẻ đẹp của người phụ nữ không nằm ở việc làm được tất cả. Nó nằm ở việc biết mình là ai, và vẫn đủ mềm mại để yêu thương — cả người khác lẫn chính mình.',
-    paragraph2:
-      'Chúc Chị giữ được điều đó — hôm nay và cả những ngày thường, khi chẳng ai nhắc đến 20/10.',
-    thanksLine: 'vì đã làm thế giới quanh mình dịu hơn một chút.',
-  },
-  {
-    paragraph1:
-      '20/10 — một ngày để mỉm cười với chính mình trước khi nhận lời chúc từ người khác. Đôi khi cái cười ấy mới là món quà quan trọng nhất.',
-    paragraph2: 'Chị đã đi được rất xa rồi. Hãy tự hào về điều đó — dù có lúc Chị quên mất.',
-    thanksLine: 'vì đã luôn là phiên bản thật của chính mình.',
-  },
-  {
-    paragraph1:
-      'Không phải chờ đến 20/10 Chị mới đáng được trân trọng. Nhưng hôm nay là dịp đẹp để nói ra điều đó — rõ ràng và không ngại ngùng.',
-    paragraph2:
-      'Chúc Chị được lắng nghe nhiều hơn — và được đối xử đúng với những gì Chị xứng đáng nhận.',
-    thanksLine: 'vì đã mang lại sức sống cho mọi người xung quanh.',
-  },
-  {
-    paragraph1:
-      'Ngày Phụ nữ Việt Nam là lời cảm ơn gửi tới sự chịu đựng, sự dịu dàng và cả những lúc Chị phải rất mạnh mẽ — dù chẳng ai nhìn thấy hết.',
-    paragraph2:
-      'Hãy nhớ yêu bản thân mình không kém gì cách Chị đã yêu thương người khác mỗi ngày.',
-    thanksLine: 'vì đã sống tử tế và cháy hết mình theo cách riêng.',
-  },
-  {
-    paragraph1:
-      '20/10 này, xin chúc Chị một điều đơn giản: được vui theo cách mình muốn — không cần phải hợp gu ai cả.',
-    paragraph2:
-      'Không cần phải hoàn hảo. Không cần phải gồng. Chỉ cần được là mình — và được phép nghỉ khi mệt.',
-    thanksLine: 'vì đã mang đến ánh sáng rất riêng cho tập thể này.',
-  },
-  {
-    paragraph1:
-      'Có lúc công việc cuốn đi rất nhanh, đến mức quên mất mình cũng cần được nâng niu. 20/10 là lúc để nhớ lại điều đó.',
-    paragraph2:
-      'Hôm nay, xin dành một lời nhắc nhẹ: Chị quan trọng không kém bất kỳ ai — và xứng đáng được đối xử như vậy.',
-    thanksLine: 'vì đã luôn hoàn thành tốt phần việc của một người phụ nữ tuyệt vời.',
-  },
-  {
-    paragraph1:
-      'Nhân 20/10, xin chúc Chị giữ được nụ cười — cái thứ làm mọi người thấy nhẹ lòng mỗi khi gặp, kể cả những ngày mệt mỏi nhất.',
-    paragraph2:
-      'Dù ngày thường hay ngày lễ, Chị đều đáng được nói lời cảm ơn — hôm nay chỉ là dịp để nói to hơn một chút.',
-    thanksLine: 'vì đã mang hơi ấm và sự dễ chịu đến những người quanh mình.',
+      'Ngày thường hay ngày lễ, Chị đều đáng được cảm ơn. Hôm nay chỉ là dịp để cả nhà nói to hơn một chút.',
+    thanksLine: 'vì Chị đã mang niềm vui đến cho những người quanh mình.',
   },
 ]
 

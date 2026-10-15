@@ -10,6 +10,7 @@ import FallingPetals from '@/app/_components/falling-petals'
 import { ActivePageProvider } from '@/app/_components/invitation-flipbook/active-page-context'
 import { GuestProvider } from '@/app/_components/invitation-flipbook/guest-context'
 import { useBookPageSize } from '@/app/_components/invitation-flipbook/use-book-page-size'
+import MusicToggle from '@/app/_components/music-toggle'
 import Page1 from '@/app/_components/page-1'
 import Page2 from '@/app/_components/page-2'
 import Page3 from '@/app/_components/page-3'
@@ -21,7 +22,8 @@ import { cn } from '@/lib/utils'
 type PageFlipHandle = {
   pageFlip: () => {
     flipNext: () => void
-    flipPrev: () => void
+    getBoundsRect: () => { left: number; top: number }
+    getFlipController: () => { flip: (point: { x: number; y: number }) => void }
   }
 }
 
@@ -109,9 +111,12 @@ const InvitationFlipbook = ({ guest }: { guest?: Guest | null }) => {
 
       const pageFlip = bookRef.current?.pageFlip()
 
-      if (direction === 'prev' && activePage > 0) {
+      if (direction === 'prev' && activePage > 0 && pageFlip) {
         setFlipDirection('back')
-        pageFlip?.flipPrev()
+        // page-flip 2.0.7: flipPrev() dùng x=10 tuyệt đối, quên trừ rect.left → ở chế độ portrait
+        // (mobile) điểm rơi ngoài góc sách và bị bỏ qua. Tự lật từ góc trên-trái theo toạ độ sách.
+        const { left, top } = pageFlip.getBoundsRect()
+        pageFlip.getFlipController().flip({ x: left + 10, y: top + 1 })
         return
       }
 
@@ -354,6 +359,7 @@ const InvitationFlipbook = ({ guest }: { guest?: Guest | null }) => {
               </motion.div>
             </div>
             <FallingPetals layer='front' />
+            <MusicToggle />
           </section>
         </ActivePageProvider>
       </GuestProvider>
