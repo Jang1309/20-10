@@ -89,6 +89,7 @@ const PortraitFrame = ({ src, alt }: { src: string; alt: string }) => {
               src={src}
               alt={alt}
               fill
+              unoptimized
               sizes='160px'
               className='object-cover object-[50%_25%]'
             />
@@ -111,6 +112,7 @@ const PortraitFrame = ({ src, alt }: { src: string; alt: string }) => {
         aria-hidden
         width={1254}
         height={1254}
+        unoptimized
         className='pointer-events-none absolute -left-[1.75rem] top-[1.25rem] w-[2.4rem] -rotate-[24deg] opacity-90 drop-shadow-[0_0.25rem_0.4rem_rgba(157,61,74,0.2)]'
       />
     </motion.div>
