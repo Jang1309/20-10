@@ -72,7 +72,6 @@ const CoverPortrait = ({ src, name }: { src: string; name: string }) => (
           fill
           sizes='200px'
           priority
-          unoptimized
           className='object-cover object-[50%_20%]'
         />
         {/* Ám hồng ở rìa, giữ sáng vùng mặt — nền ảnh chụp (thường xám) hoà vào tông thiệp. */}

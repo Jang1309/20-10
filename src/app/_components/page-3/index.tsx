@@ -90,7 +90,6 @@ const PortraitFrame = ({ src, alt }: { src: string; alt: string }) => {
               alt={alt}
               fill
               sizes='160px'
-              unoptimized
               className='object-cover object-[50%_25%]'
             />
             {/* Phủ hồng nhẹ ở đáy để dòng thư pháp đè lên vẫn đọc rõ. */}

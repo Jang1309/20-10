@@ -3,17 +3,17 @@
 import { readFile } from 'node:fs/promises'
 import { join } from 'node:path'
 
-import { EVENT_NAME, EVENT_VENUE, EVENT_WHEN, ORG_NAME } from '@/lib/site'
+import { ORG_NAME } from '@/lib/site'
 
 export const OG_SIZE = { width: 1200, height: 630 }
 
 type OgAssets = {
   background: string
   invite: string
+  logo: string
 }
 type CardProps = {
   who: string
-  title?: string
   partner?: string
   big?: boolean
   assets: OgAssets
@@ -64,25 +64,46 @@ export const getOgAssets = () => {
   assetsPromise ??= Promise.all([
     readAsset('bg-20-10.png', 'image/png'),
     readAsset('title.png', 'image/png'),
-  ]).then(([background, invite]) => ({ background, invite }))
+    readAsset('d-logo.png', 'image/png'),
+  ]).then(([background, invite, logo]) => ({ background, invite, logo }))
 
   return assetsPromise
 }
 
-/** Khung ảnh chia sẻ (Open Graph) cho thiệp chúc 20/10. */
-export const OgCard = ({ who, title, partner, big = true, assets }: CardProps) => (
+const TitleCard = ({ src, width, height }: { src: string; width: number; height: number }) => (
+  <div
+    style={{
+      width,
+      height,
+      display: 'flex',
+      background: '#fff7f4',
+      borderRadius: 18,
+      overflow: 'hidden',
+      border: '1px solid rgba(201,154,74,0.55)',
+      boxShadow: '0 16px 40px rgba(157,61,74,0.16)',
+    }}
+  >
+    <img
+      src={src}
+      alt=''
+      width={width}
+      height={height}
+      style={{ width, height, objectFit: 'contain' }}
+    />
+  </div>
+)
+
+/** Ảnh chia sẻ: tiêu đề thiệp trên nền lụa, tên khách một dòng. Không lặp lại câu 20/10. */
+export const OgCard = ({ who, partner, big = true, assets }: CardProps) => (
   <div
     style={{
       width: '100%',
       height: '100%',
       display: 'flex',
-      alignItems: 'stretch',
-      justifyContent: 'center',
       position: 'relative',
-      padding: 52,
-      fontFamily: 'Noto Sans',
-      color: '#fff7f4',
       background: '#f6dde3',
+      fontFamily: 'Noto Sans',
+      color: '#9d2340',
     }}
   >
     <img
@@ -94,129 +115,97 @@ export const OgCard = ({ who, title, partner, big = true, assets }: CardProps) =
         position: 'absolute',
         top: 0,
         left: 0,
-        width: '100%',
-        height: '100%',
-        objectFit: 'cover',
-        opacity: 0.92,
-      }}
-    />
-    <div
-      style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
         width: 1200,
         height: 630,
-        background:
-          'linear-gradient(90deg, rgba(255,236,240,0.08) 0%, rgba(122,42,58,0.55) 46%, rgba(74,18,32,0.88) 100%)',
+        objectFit: 'cover',
       }}
     />
-    <div
-      style={{
-        position: 'absolute',
-        top: 28,
-        left: 28,
-        width: 1144,
-        height: 574,
-        border: '2px solid rgba(226,191,111,0.56)',
-        borderRadius: 18,
-      }}
-    />
-    <div
-      style={{
-        position: 'relative',
-        display: 'flex',
-        alignItems: 'center',
-        gap: 48,
-        width: '100%',
-        height: '100%',
-      }}
-    >
+    {big ? (
       <div
         style={{
-          width: 281,
-          height: 548,
-          display: 'flex',
           position: 'relative',
-          overflow: 'hidden',
-          border: '1px solid rgba(226,191,111,0.86)',
-          borderRadius: 8,
-          boxShadow: '0 28px 78px rgba(0,0,0,0.42)',
-          background: 'rgba(248,241,228,0.92)',
+          display: 'flex',
+          alignItems: 'center',
+          width: '100%',
+          height: '100%',
+          padding: '40px 64px',
+          gap: 56,
+        }}
+      >
+        <TitleCard
+          src={assets.invite}
+          width={360}
+          height={480}
+        />
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            width: 640,
+          }}
+        >
+          <div style={{ fontSize: 22, fontWeight: 700, letterSpacing: 4, color: '#a24b5c' }}>
+            THÂN GỬI
+          </div>
+          <div
+            style={{
+              marginTop: 14,
+              fontSize: 54,
+              fontWeight: 700,
+              lineHeight: 1.15,
+              color: '#9d2340',
+            }}
+          >
+            {who}
+          </div>
+          {partner ? (
+            <div style={{ marginTop: 8, fontSize: 28, color: '#9d2340' }}>{partner}</div>
+          ) : null}
+          <div
+            style={{
+              marginTop: 28,
+              width: 72,
+              height: 2,
+              background: '#c99a4a',
+            }}
+          />
+          <img
+            src={assets.logo}
+            alt=''
+            width={168}
+            height={46}
+            style={{ marginTop: 22, width: 168, height: 46, objectFit: 'contain' }}
+          />
+        </div>
+      </div>
+    ) : (
+      <div
+        style={{
+          position: 'relative',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: '100%',
+          height: '100%',
+          gap: 18,
         }}
       >
         <img
-          src={assets.invite}
+          src={assets.logo}
           alt=''
-          width={281}
-          height={548}
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            objectFit: 'contain',
-          }}
+          width={150}
+          height={41}
+          style={{ width: 150, height: 41, objectFit: 'contain' }}
         />
-      </div>
-
-      <div
-        style={{
-          flex: 1,
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          paddingRight: 18,
-        }}
-      >
-        <div style={{ fontSize: 28, color: '#f3d58a', fontWeight: 700 }}>THIỆP CHÚC</div>
-        <div
-          style={{
-            marginTop: 18,
-            fontSize: big ? 62 : 46,
-            fontWeight: 700,
-            color: '#f3d58a',
-            lineHeight: 1.12,
-          }}
-        >
-          {who}
-        </div>
-        {partner ? (
-          <div style={{ marginTop: 4, fontSize: 28, color: '#f3d58a' }}>{partner}</div>
-        ) : null}
-        {title ? (
-          <div style={{ marginTop: 12, fontSize: 25, color: '#fff7f4', lineHeight: 1.35 }}>
-            {title}
-          </div>
-        ) : null}
-        <div
-          style={{
-            marginTop: 28,
-            marginBottom: 26,
-            width: 220,
-            height: 2,
-            background: 'rgba(210,178,110,0.72)',
-          }}
+        <TitleCard
+          src={assets.invite}
+          width={340}
+          height={453}
         />
-        <div
-          style={{
-            maxWidth: 650,
-            fontSize: 38,
-            fontWeight: 700,
-            color: '#ffffff',
-            textTransform: 'uppercase',
-            lineHeight: 1.22,
-          }}
-        >
-          {EVENT_NAME}
-        </div>
-        <div style={{ marginTop: 24, fontSize: 26, color: '#d2b26e' }}>{EVENT_WHEN}</div>
-        <div style={{ marginTop: 8, fontSize: 24, color: '#fff7f4' }}>{EVENT_VENUE}</div>
-        <div style={{ marginTop: 30, fontSize: 19, color: 'rgba(255,247,244,0.82)' }}>
-          {ORG_NAME.toUpperCase()}
-        </div>
+        <div style={{ fontSize: 20, color: '#7a3a40' }}>{ORG_NAME}</div>
       </div>
-    </div>
+    )}
   </div>
 )

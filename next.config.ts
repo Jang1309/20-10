@@ -8,6 +8,9 @@ const withBundleAnalyzer = bundleAnalyzer({
 const nextConfig: NextConfig = {
   images: {
     formats: ['image/webp'],
+    // Next 16: ảnh nội bộ có query phải khai báo mới được tối ưu. Ảnh khách có `?v=<mốc sửa>`
+    // nên bỏ `search` cho riêng route này; ảnh tĩnh trong /public thì không có query.
+    localPatterns: [{ pathname: '/api/guests/*/photos/*' }, { pathname: '/**', search: '' }],
     minimumCacheTTL: 2678400,
     remotePatterns: [
       { protocol: 'https', hostname: '**' },
