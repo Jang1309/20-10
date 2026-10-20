@@ -46,3 +46,43 @@ export function useIsTablet() {
 export function useIsAndroid() {
   return React.useSyncExternalStore(subscribeToPlatform, getAndroidSnapshot, getServerSnapshot)
 }
+
+type NavigatorWithMemory = Navigator & {
+  deviceMemory?: number
+  connection?: { saveData?: boolean; effectiveType?: string; addEventListener?: EventListener }
+}
+
+/** Máy yếu / tiết kiệm dữ liệu — dùng để tắt hiệu ứng nặng, điện thoại khỏe vẫn full. */
+function getLowEndSnapshot() {
+  const nav = window.navigator as NavigatorWithMemory
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return true
+  if (nav.connection?.saveData) return true
+  const net = nav.connection?.effectiveType
+  if (net === '2g' || net === 'slow-2g') return true
+
+  const memory = nav.deviceMemory
+  const cores = nav.hardwareConcurrency ?? 8
+  // Chrome báo RAM GB; ≤4 gần như luôn máy phổ thông yếu GPU.
+  if (typeof memory === 'number' && memory <= 4) return true
+  if (cores <= 4) return true
+  // Android mid-range hay khai 6–8 core nhưng RAM thấp.
+  if (/Android/i.test(nav.userAgent) && typeof memory === 'number' && memory <= 6) return true
+  return false
+}
+
+function subscribeToLowEnd(onStoreChange: () => void) {
+  const mql = window.matchMedia('(prefers-reduced-motion: reduce)')
+  mql.addEventListener('change', onStoreChange)
+  const conn = (window.navigator as NavigatorWithMemory).connection as
+    | (EventTarget & { saveData?: boolean; effectiveType?: string })
+    | undefined
+  conn?.addEventListener('change', onStoreChange)
+  return () => {
+    mql.removeEventListener('change', onStoreChange)
+    conn?.removeEventListener('change', onStoreChange)
+  }
+}
+
+export function useIsLowEndDevice() {
+  return React.useSyncExternalStore(subscribeToLowEnd, getLowEndSnapshot, getServerSnapshot)
+}

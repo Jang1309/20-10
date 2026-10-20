@@ -256,6 +256,50 @@ body {
   }
 }
 
+/* Máy yếu (JS gắn class --lite): bỏ blur/3D cánh hoa + filter trên sách. */
+.invitation-stage--lite .falling-petals {
+  perspective: none;
+}
+
+.invitation-stage--lite .falling-petals--front {
+  display: none;
+}
+
+.invitation-stage--lite .falling-petal {
+  filter: none;
+  transform-style: flat;
+  will-change: auto;
+}
+
+.invitation-stage--lite .falling-petal:nth-child(n + 14) {
+  display: none;
+}
+
+.invitation-stage--lite .falling-petal__sway,
+.invitation-stage--lite .falling-petal__spin {
+  animation: none;
+  transform-style: flat;
+}
+
+.invitation-stage--lite .falling-petal img {
+  animation: none;
+}
+
+.invitation-stage--lite .invitation-book {
+  filter: none;
+}
+
+.invitation-stage--lite .book-shell {
+  box-shadow: 0 0.7rem 1.4rem rgba(157, 61, 74, 0.2);
+}
+
+.invitation-stage--lite .invitation-book .stf__innerShadow,
+.invitation-stage--lite .invitation-book .stf__hardInnerShadow,
+.invitation-stage--lite .invitation-book .stf__outerShadow,
+.invitation-stage--lite .invitation-book .stf__hardShadow {
+  display: none !important;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .falling-petal,
   .falling-petal__sway,
@@ -618,7 +662,6 @@ body {
 
   .invitation-book .stf__innerShadow,
   .invitation-book .stf__hardInnerShadow {
-    /* Ám hồng rose thay sepia vàng — khớp nền thiệp #f6dde3 / accent #D92F45. */
     filter: blur(0.08rem) sepia(0.55) saturate(2.2) hue-rotate(320deg) contrast(1.05);
   }
 
@@ -656,8 +699,6 @@ body {
     aspect-ratio: 24 / 47;
   }
 
-  /* Trên mobile bỏ bóng gáy sách (chỉ có ý nghĩa ở chế độ 2 trang) — bóng đổ khi
-     lật trang (stf__outerShadow/innerShadow) vẫn giữ, xem drawShadow trong flip-book.tsx. */
   .book-shell::before {
     display: none;
   }
@@ -671,36 +712,18 @@ body {
     display: none;
   }
 
-  /* Các chỉnh sửa bóng lật trang dưới đây CHỈ áp dụng cho mobile (portrait, 1
-     trang) — ở desktop (2 trang, landscape) khi lật gần hết một trang, vùng
-     stf__innerShadow phủ gần trọn cả trang chứ không chỉ riêng nếp cuộn nhỏ, nên
-     ép nền đặc + tô đậm màu ở đó biến thành một khối màu phẳng che kín nội dung.
-     Scope theo @media để desktop giữ nguyên `filter: blur(0.08rem)` gốc. */
   .invitation-book .stf__innerShadow,
   .invitation-book .stf__hardInnerShadow {
-    /* Bóng "trong" tại nếp gấp — ám hồng rose cho khớp thiệp #f6dde3. */
     filter: blur(0.08rem) sepia(0.55) saturate(2.2) hue-rotate(320deg) contrast(1.05);
   }
 
   .book-shell[data-flip-direction='forward'] .invitation-book .stf__innerShadow,
   .book-shell[data-flip-direction='forward'] .invitation-book .stf__hardInnerShadow {
-    /* react-pageflip chỉ vẽ 1 gradient đen→trong suốt cho phần bóng "trong" —
-       không có lớp nền đặc phía sau nên nhìn "trong", như kính mờ. Ép nền hồng đặc
-       làm lớp lót phía dưới gradient — JS chỉ set `background` (gradient) qua
-       inline style nên không đụng tới `background-color` ở đây; !important để
-       thắng inline (JS ghi đè mỗi khung hình nhưng chỉ set background-image,
-       không phải background-color).
-       Chỉ bật khi lật TỚI (forward): khi lật LÙI, react-pageflip tính vùng
-       innerShadow rộng hơn hẳn (không chỉ riêng chỗ cuộn), ép nền đặc lúc đó sẽ
-       che mất cả trang phía sau — nên [data-flip-direction] dùng để loại trừ TH đó.
-       Lưu ý: KHÔNG áp cho stf__outerShadow — phần tử đó phủ nguyên trang để đổ
-       bóng xuống trang bên dưới, ép nền đặc ở đó sẽ che mất trang phía sau. */
     background-color: #f6dde3 !important;
   }
 
   .invitation-book .stf__outerShadow,
   .invitation-book .stf__hardShadow {
-    /* Bóng "ngoài" đổ xuống mặt giấy — mềm hơn bóng trong, cùng tông rose. */
     filter: blur(0.5rem) sepia(0.55) saturate(2.2) hue-rotate(320deg);
   }
 }
