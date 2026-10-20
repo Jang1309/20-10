@@ -87,11 +87,7 @@ const FallingPetals = ({ layer = 'back' }: { layer?: Layer }) => (
     {LAYERS[layer].map((petal, index) => (
       <span
         key={index}
-        className={cn(
-          'falling-petal',
-          petal.extra && 'falling-petal--extra',
-          layer === 'back' && index >= 12 && 'falling-petal--lite',
-        )}
+        className={cn('falling-petal', petal.extra && 'falling-petal--extra')}
         style={
           {
             '--petal-left': `${petal.left}%`,

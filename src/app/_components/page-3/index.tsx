@@ -25,7 +25,6 @@ import {
   scaleIn,
   writeIn,
 } from '@/lib/animations'
-import { isLiteMotion } from '@/lib/lite-motion'
 import { cn } from '@/lib/utils'
 import { parseWishKind } from '@/lib/wish-kind'
 import { pickPage3Wish } from '@/lib/wishes-20-10'
@@ -138,7 +137,7 @@ const BURST: (BurstParticle & { kind: 'heart' | 'a' | 'b' | 'c' })[] = [
 
 /** Cánh hoa và tim bung nhẹ một lần quanh chữ "Cảm ơn". */
 const ThanksBurst = ({ play }: { play: boolean }) => {
-  if (useReducedMotion() || isLiteMotion()) return null
+  if (useReducedMotion()) return null
   return (
     <motion.span
       initial='hidden'

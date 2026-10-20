@@ -75,14 +75,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='vi'>
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            // shortcut: chỉ Chromium có deviceMemory, Firefox Android giữ animation đầy đủ
-            __html: `(function(){try{var m=navigator.deviceMemory;if(typeof m==="number"&&m<=4)document.documentElement.dataset.motion="lite"}catch(e){}})()`,
-          }}
-        />
-      </head>
       <body
         className={`${lora.variable} ${pinyonScript.variable} ${styleScript.variable} ${notoSerif.variable} ${greatVibes.variable} font-sans antialiased`}
       >

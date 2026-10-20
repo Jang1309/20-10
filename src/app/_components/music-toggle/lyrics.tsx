@@ -55,8 +55,8 @@ const KaraokeText = ({
 )
 
 const lineMotion = {
-  initial: { opacity: 0, y: 20 },
-  exit: { opacity: 0, y: -20 },
+  initial: { opacity: 0, y: 20, filter: 'blur(6px)' },
+  exit: { opacity: 0, y: -20, filter: 'blur(6px)' },
   transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
 } as const
 
@@ -86,31 +86,20 @@ const Lyrics = ({
   useEffect(() => {
     if (!playing) return
     let frame = 0
-    let lastIndex = -2
-    const measure = () => {
+    const tick = () => {
+      const time = audioRef.current?.currentTime ?? 0
+      const current = lineIndexAt(time)
+      setIndex(current)
       const book = document.querySelector('.invitation-book')
       if (book) setBookHalf(Math.round(book.getBoundingClientRect().width / 2))
       const controls = document.querySelector('.compact-book-controls')
       if (controls) setControlsTop(Math.round(controls.getBoundingClientRect().top))
-    }
-    measure()
-    window.addEventListener('resize', measure)
-    const tick = () => {
-      const time = audioRef.current?.currentTime ?? 0
-      const current = lineIndexAt(time)
-      if (current !== lastIndex) {
-        lastIndex = current
-        setIndex(current)
-      }
       const line = LYRICS[current]
       if (line) progress.set(Math.min(1, (time - line.time) / fillSpan(line, LYRICS[current + 1])))
       frame = requestAnimationFrame(tick)
     }
     tick()
-    return () => {
-      cancelAnimationFrame(frame)
-      window.removeEventListener('resize', measure)
-    }
+    return () => cancelAnimationFrame(frame)
   }, [audioRef, playing, progress])
 
   const current = parseLine(index)
@@ -151,6 +140,7 @@ const Lyrics = ({
                 animate={{
                   opacity: active ? 1 : 0.65,
                   y: 0,
+                  filter: 'blur(0px)',
                 }}
                 className={cn(
                   'col-start-1 row-start-1 max-w-[min(24rem,100%)]',
@@ -187,9 +177,9 @@ const Lyrics = ({
             <motion.p
               key={index}
               {...lineMotion}
-              animate={{ opacity: current.backing ? 0.85 : 1, y: 0 }}
+              animate={{ opacity: current.backing ? 0.85 : 1, y: 0, filter: 'blur(0px)' }}
               className={cn(
-                'lyrics-pill col-start-1 row-start-1 max-w-[min(34rem,100%)] rounded-2xl bg-[#9d3d4a]/35 px-3 py-1 text-center shadow-[0_0.5rem_1.5rem_rgba(157,61,74,0.2)] backdrop-blur-md',
+                'col-start-1 row-start-1 max-w-[min(34rem,100%)] rounded-2xl bg-[#9d3d4a]/35 px-3 py-1 text-center shadow-[0_0.5rem_1.5rem_rgba(157,61,74,0.2)] backdrop-blur-md',
                 lineClass(current.backing),
                 current.backing
                   ? 'text-[0.9rem] xsm:text-[0.78rem]'
