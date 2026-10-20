@@ -41,13 +41,20 @@ type Props = {
   onChanged: () => void
 }
 
+const ACCEPT = new Set(['image/jpeg', 'image/png', 'image/webp'])
+
 const GuestPhotoField = ({ guestId, slot, label, url, onChanged }: Props) => {
   const inputRef = useRef<HTMLInputElement>(null)
   const [preview, setPreview] = useState(url)
   const [busy, setBusy] = useState(false)
+  const [dragging, setDragging] = useState(false)
   const endpoint = `/api/guests/${guestId}/photos/${slot}`
 
   const upload = async (file: File) => {
+    if (!ACCEPT.has(file.type)) {
+      toast.error('Chỉ nhận JPG, PNG hoặc WebP.')
+      return
+    }
     setBusy(true)
     try {
       const blob = await shrinkImage(file).catch(() => {
@@ -91,7 +98,34 @@ const GuestPhotoField = ({ guestId, slot, label, url, onChanged }: Props) => {
         type='button'
         onClick={() => inputRef.current?.click()}
         disabled={busy}
-        className='relative flex aspect-[3/4] items-center justify-center overflow-hidden rounded-md border border-dashed border-gray-300 bg-gray-50 text-gray-400 transition hover:border-[#D92F45] hover:text-[#D92F45] disabled:opacity-60'
+        onDragEnter={(event) => {
+          event.preventDefault()
+          event.stopPropagation()
+          if (!busy) setDragging(true)
+        }}
+        onDragOver={(event) => {
+          event.preventDefault()
+          event.stopPropagation()
+        }}
+        onDragLeave={(event) => {
+          event.preventDefault()
+          // Chỉ tắt highlight khi rời hẳn ô (không phải sang con bên trong).
+          if (event.currentTarget.contains(event.relatedTarget as Node)) return
+          setDragging(false)
+        }}
+        onDrop={(event) => {
+          event.preventDefault()
+          event.stopPropagation()
+          setDragging(false)
+          if (busy) return
+          const file = event.dataTransfer.files?.[0]
+          if (file) void upload(file)
+        }}
+        className={`relative flex aspect-[3/4] items-center justify-center overflow-hidden rounded-md border border-dashed bg-gray-50 text-gray-400 transition disabled:opacity-60 ${
+          dragging
+            ? 'border-[#D92F45] bg-[#D92F45]/5 text-[#D92F45]'
+            : 'border-gray-300 hover:border-[#D92F45] hover:text-[#D92F45]'
+        }`}
         aria-label={preview ? `Đổi ${label.toLowerCase()}` : `Tải ${label.toLowerCase()}`}
       >
         {preview ? (
@@ -99,17 +133,22 @@ const GuestPhotoField = ({ guestId, slot, label, url, onChanged }: Props) => {
           <img
             src={preview}
             alt={label}
-            className='h-full w-full object-cover'
+            className='pointer-events-none h-full w-full object-cover'
           />
         ) : (
-          <span className='flex flex-col items-center gap-1 text-xs'>
+          <span className='pointer-events-none flex flex-col items-center gap-1 px-2 text-center text-xs'>
             <ImagePlusIcon className='size-5' />
-            Chọn ảnh
+            {dragging ? 'Thả ảnh vào đây' : 'Chọn hoặc kéo thả ảnh'}
           </span>
         )}
         {busy && (
           <span className='absolute inset-0 flex items-center justify-center bg-white/70 text-xs text-gray-600'>
             Đang xử lý…
+          </span>
+        )}
+        {dragging && preview && (
+          <span className='pointer-events-none absolute inset-0 flex items-center justify-center bg-[#D92F45]/15 text-xs font-medium text-[#D92F45]'>
+            Thả để đổi ảnh
           </span>
         )}
       </button>
