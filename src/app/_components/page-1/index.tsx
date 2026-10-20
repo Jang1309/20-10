@@ -79,7 +79,7 @@ const CoverPortrait = ({ src, name }: { src: string; name: string }) => (
         {/* Ám hồng ở rìa, giữ sáng vùng mặt — nền ảnh chụp (thường xám) hoà vào tông thiệp. */}
         <div
           aria-hidden
-          className='absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_38%,rgba(248,206,216,0)_45%,rgba(248,206,216,0.55)_100%)] max-[1024px]:opacity-80'
+          className='absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_38%,rgba(248,206,216,0)_45%,rgba(248,206,216,0.75)_100%)] mix-blend-multiply'
         />
         <Sheen
           delay={2.8}

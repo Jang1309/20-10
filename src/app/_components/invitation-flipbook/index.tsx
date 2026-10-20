@@ -14,7 +14,7 @@ import MusicToggle from '@/app/_components/music-toggle'
 import Page1 from '@/app/_components/page-1'
 import Page2 from '@/app/_components/page-2'
 import Page3 from '@/app/_components/page-3'
-import { useIsLowEndDevice, useIsMobile, useIsTablet } from '@/hooks/use-mobile'
+import { useIsMobile, useIsTablet } from '@/hooks/use-mobile'
 import { bookOpen, withDelay, fadeIn } from '@/lib/animations'
 import type { Guest } from '@/lib/guest'
 import { cn } from '@/lib/utils'
@@ -75,7 +75,6 @@ const InvitationFlipbook = ({ guest }: { guest?: Guest | null }) => {
   const pointerStartXRef = useRef<number | null>(null)
   const isMobile = useIsMobile()
   const isTablet = useIsTablet()
-  const isLowEnd = useIsLowEndDevice()
   const isCompactBook = isMobile || isTablet
   const bookPageSize = useBookPageSize()
   const [activePage, setActivePage] = useState(0)
@@ -238,12 +237,7 @@ const InvitationFlipbook = ({ guest }: { guest?: Guest | null }) => {
     <MotionConfig reducedMotion='user'>
       <GuestProvider value={guest ?? null}>
         <ActivePageProvider value={{ page: activePage, orientation }}>
-          <section
-            className={cn(
-              'invitation-stage relative flex min-h-svh overflow-hidden text-[#5e2f35] pt-[2rem] lg:h-svh lg:min-h-0 lg:pt-[0.75rem] xlg:h-svh xlg:min-h-0 xlg:pt-[0.75rem]',
-              isLowEnd && 'invitation-stage--lite',
-            )}
-          >
+          <section className='invitation-stage relative flex min-h-svh overflow-hidden text-[#5e2f35] pt-[2rem] lg:h-svh lg:min-h-0 lg:pt-[0.75rem] xlg:h-svh xlg:min-h-0 xlg:pt-[0.75rem]'>
             <Image
               src='/bg-20-10.png'
               alt='Background'
@@ -254,8 +248,6 @@ const InvitationFlipbook = ({ guest }: { guest?: Guest | null }) => {
               className='absolute inset-0 object-cover'
             />
             <FallingPetals />
-            {/* Lớp cánh hoa trước thiệp: tắt trên máy yếu (blur/bokeh rất nặng). */}
-            {!isLowEnd && <FallingPetals layer='front' />}
             <div className='relative z-10 mx-auto flex w-full max-w-[78rem] flex-col items-center justify-center gap-5 px-0 xlg:h-full xlg:max-w-full xlg:gap-2 tablet:px-4 xsm:px-4'>
               <motion.div
                 initial='hidden'
@@ -296,7 +288,7 @@ const InvitationFlipbook = ({ guest }: { guest?: Guest | null }) => {
                         maxHeight={bookPageSize.maxHeight}
                         size='stretch'
                         startPage={0}
-                        drawShadow={!isLowEnd}
+                        drawShadow
                         flippingTime={isCompactBook ? 700 : 1000}
                         usePortrait={isCompactBook}
                         startZIndex={30}
@@ -366,6 +358,7 @@ const InvitationFlipbook = ({ guest }: { guest?: Guest | null }) => {
                 </div>
               </motion.div>
             </div>
+            <FallingPetals layer='front' />
             <MusicToggle />
           </section>
         </ActivePageProvider>

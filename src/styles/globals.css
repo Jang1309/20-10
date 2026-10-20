@@ -256,50 +256,6 @@ body {
   }
 }
 
-/* Máy yếu (JS gắn class --lite): bỏ blur/3D cánh hoa + filter trên sách. */
-.invitation-stage--lite .falling-petals {
-  perspective: none;
-}
-
-.invitation-stage--lite .falling-petals--front {
-  display: none;
-}
-
-.invitation-stage--lite .falling-petal {
-  filter: none;
-  transform-style: flat;
-  will-change: auto;
-}
-
-.invitation-stage--lite .falling-petal:nth-child(n + 14) {
-  display: none;
-}
-
-.invitation-stage--lite .falling-petal__sway,
-.invitation-stage--lite .falling-petal__spin {
-  animation: none;
-  transform-style: flat;
-}
-
-.invitation-stage--lite .falling-petal img {
-  animation: none;
-}
-
-.invitation-stage--lite .invitation-book {
-  filter: none;
-}
-
-.invitation-stage--lite .book-shell {
-  box-shadow: 0 0.7rem 1.4rem rgba(157, 61, 74, 0.2);
-}
-
-.invitation-stage--lite .invitation-book .stf__innerShadow,
-.invitation-stage--lite .invitation-book .stf__hardInnerShadow,
-.invitation-stage--lite .invitation-book .stf__outerShadow,
-.invitation-stage--lite .invitation-book .stf__hardShadow {
-  display: none !important;
-}
-
 @media (prefers-reduced-motion: reduce) {
   .falling-petal,
   .falling-petal__sway,

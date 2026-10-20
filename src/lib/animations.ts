@@ -77,13 +77,14 @@ export const writeIn: Variants = {
   },
 }
 
-/** Ảnh chân dung: từ mờ, hơi phóng to → rõ nét. Không dùng filter:blur (rất nặng trên mobile). */
+/** Ảnh chân dung: từ mờ, hơi phóng to → rõ nét. */
 export const portraitIn: Variants = {
-  hidden: { opacity: 0, scale: 1.06 },
+  hidden: { opacity: 0, scale: 1.08, filter: 'blur(8px)' },
   show: {
     opacity: 1,
     scale: 1,
-    transition: { duration: 1.1, ease: easeOutExpo },
+    filter: 'blur(0px)',
+    transition: { duration: 1.3, ease: easeOutExpo },
   },
 }
 
@@ -92,14 +93,16 @@ export const dropIn: Variants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: easeOutExpo } },
 }
 
-/** Cả cuốn thiệp nổi lên khi mở trang. Tránh rotateX — trên một số GPU Android làm thiệp trắng/giật. */
+/** Cả cuốn thiệp nổi lên khi mở trang. */
 export const bookOpen: Variants = {
-  hidden: { opacity: 0, y: 28, scale: 0.96 },
+  hidden: { opacity: 0, y: 40, scale: 0.94, rotateX: 10, transformPerspective: 1200 },
   show: {
     opacity: 1,
+    transformPerspective: 1200,
     y: 0,
     scale: 1,
-    transition: { duration: 0.9, ease: easeOutExpo },
+    rotateX: 0,
+    transition: { duration: 1.1, ease: easeOutExpo },
   },
 }
 
