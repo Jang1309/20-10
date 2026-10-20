@@ -77,13 +77,12 @@ export const writeIn: Variants = {
   },
 }
 
-/** Ảnh chân dung: từ mờ, hơi phóng to → rõ nét. */
+/** Ảnh chân dung: hơi phóng to, mờ dần rồi rõ. Không animate `filter` — blur mỗi frame bắt GPU vẽ lại. */
 export const portraitIn: Variants = {
-  hidden: { opacity: 0, scale: 1.08, filter: 'blur(8px)' },
+  hidden: { opacity: 0, scale: 1.08 },
   show: {
     opacity: 1,
     scale: 1,
-    filter: 'blur(0px)',
     transition: { duration: 1.3, ease: easeOutExpo },
   },
 }

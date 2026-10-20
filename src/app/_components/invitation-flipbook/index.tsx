@@ -16,6 +16,7 @@ import Page2 from '@/app/_components/page-2'
 import Page3 from '@/app/_components/page-3'
 import { useIsMobile, useIsTablet } from '@/hooks/use-mobile'
 import { bookOpen, withDelay, fadeIn } from '@/lib/animations'
+import { isLiteMotion } from '@/lib/lite-motion'
 import type { Guest } from '@/lib/guest'
 import { cn } from '@/lib/utils'
 
@@ -288,12 +289,12 @@ const InvitationFlipbook = ({ guest }: { guest?: Guest | null }) => {
                         maxHeight={bookPageSize.maxHeight}
                         size='stretch'
                         startPage={0}
-                        drawShadow
-                        flippingTime={isCompactBook ? 700 : 1000}
+                        drawShadow={!isLiteMotion()}
+                        flippingTime={isLiteMotion() ? 480 : isCompactBook ? 700 : 1000}
                         usePortrait={isCompactBook}
                         startZIndex={30}
                         autoSize
-                        maxShadowOpacity={0.86}
+                        maxShadowOpacity={isLiteMotion() ? 0 : 0.86}
                         showCover={!isCompactBook}
                         mobileScrollSupport={false}
                         clickEventForward
