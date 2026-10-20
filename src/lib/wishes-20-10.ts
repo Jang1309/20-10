@@ -295,45 +295,18 @@ const MOTHER_PAGE_3_WISHES: Page3Wish[] = [
 /** Thiệp cho người yêu — xưng “Em”, không branding. */
 const PARTNER_PAGE_2_WISHES: Page2Wish[] = [
   {
-    intro: 'Nhân ngày 20/10, anh xin gửi đến Em lời chúc thật ngọt ngào và chân thành.',
-    body: 'Cảm ơn Em vì đã xuất hiện trong đời anh, vì những ngày cười cùng nhau và cả những lúc Em chỉ cần ở bên là anh thấy đủ. Em là món quà đẹp nhất anh có.',
-    closing: 'Chúc Em luôn xinh đẹp, hạnh phúc, và biết rằng anh luôn ở đây vì Em.',
-  },
-  {
-    intro: '20/10 này, anh muốn Em biết một điều: Em rất đặc biệt với anh.',
-    body: 'Từ nụ cười đến những điều nhỏ Em làm mỗi ngày, tất cả đều khiến anh thấy may mắn vì được yêu Em. Hôm nay, hãy để anh chiều chuộng Em thật nhiều.',
-    closing: 'Chúc Em một ngày ngập hoa, quà và yêu thương từ anh.',
-  },
-  {
-    intro: 'Gửi Em yêu — đóa hoa đẹp nhất trong mắt anh, nhân ngày Phụ nữ Việt Nam.',
-    body: 'Cảm ơn Em vì đã kiên nhẫn, vì đã tin anh, và vì đã làm trái tim anh ấm hơn mỗi ngày. Có Em, mọi thứ trở nên dịu dàng hơn rất nhiều.',
-    closing: 'Chúc Em luôn rạng rỡ, được yêu và được nâng niu đúng cách.',
-  },
-  {
-    intro: 'Tháng Mười dịu dàng, anh xin gửi Em một bó lời chúc thay cho những điều chưa kịp nói.',
-    body: 'Em xứng đáng được hạnh phúc, được lắng nghe và được yêu theo cách Em muốn. 20/10 này, anh chỉ muốn Em cười thật nhiều.',
-    closing: 'Chúc Em vui vẻ, bình yên, và luôn có anh sát bên.',
+    intro: 'Nhân ngày 20/10, anh chúc em luôn luôn xinh đẹp và hạnh phúccc.',
+    body: 'Cảm ơn em vì đã xuất hiện trong đời anh, vì những ngày đi chơi cùm nhau và cả những lúc em chỉ cần ở bên là anh thấy đủ. Em là món quà đẹp nhất anh có.',
+    closing: 'Chúc Em luôn xinh đẹp, hạnh phúc, và biết rằng anh luôn ở đây vì emmm.',
   },
 ]
 
 const PARTNER_PAGE_3_WISHES: Page3Wish[] = [
   {
     paragraph1:
-      'Em không cần đợi đến 20/10 mới được trân trọng. Chỉ là hôm nay, anh muốn nói điều đó thành lời, thật rõ ràng và không ngại ngùng.',
-    paragraph2: 'Chúc Em luôn được lắng nghe, được thấu hiểu và nhận về những gì Em xứng đáng.',
-    thanksLine: 'vì Em đã mang yêu thương vào từng ngày của anh.',
-  },
-  {
-    paragraph1:
-      '20/10 này, chỉ mong Em một điều giản dị: được vui theo cách mình muốn, được sống theo nhịp của riêng mình, như một đóa hoa nở đúng mùa.',
-    paragraph2: 'Không cần gồng, không cần hoàn hảo, chỉ cần hạnh phúc là đủ — và anh sẽ ở đây.',
-    thanksLine: 'vì Em đã chọn ở bên anh.',
-  },
-  {
-    paragraph1:
-      'Hoa không cần rực rỡ nhất mới được yêu. Em cũng vậy: chỉ cần là chính mình đã đủ đặc biệt và đủ đáng anh trân trọng rồi.',
-    paragraph2: 'Mong Em luôn tự tin bước đi trên con đường mình chọn, với một trái tim nhẹ tênh.',
-    thanksLine: 'vì Em đã làm thế giới của anh dịu dàng hơn.',
+      'Anh không giỏi nói lời ngọt ngào, nhưng anh iuuu em nhiều lắm. Có em nhắn tin cho anh mỗi ngày của anh đều rấc vui.',
+    paragraph2: 'Mong em luôn vui vẻ, xinh đẹp và có chuyện gì cũng nhớ kể anh nghe nhé.',
+    thanksLine: 'Cảm ơn em đã đến bên anh. Mong năm nào anh cũng được chúc em 20/10 nhé.',
   },
 ]
 
