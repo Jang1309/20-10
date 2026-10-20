@@ -16,6 +16,7 @@ type CardProps = {
   who: string
   partner?: string
   big?: boolean
+  unbranded?: boolean
   assets: OgAssets
 }
 type OgFont = {
@@ -94,7 +95,7 @@ const TitleCard = ({ src, width, height }: { src: string; width: number; height:
 )
 
 /** Ảnh chia sẻ: tiêu đề thiệp trên nền lụa, tên khách một dòng. Không lặp lại câu 20/10. */
-export const OgCard = ({ who, partner, big = true, assets }: CardProps) => (
+export const OgCard = ({ who, partner, big = true, unbranded = false, assets }: CardProps) => (
   <div
     style={{
       width: '100%',
@@ -170,13 +171,15 @@ export const OgCard = ({ who, partner, big = true, assets }: CardProps) => (
               background: '#c99a4a',
             }}
           />
-          <img
-            src={assets.logo}
-            alt=''
-            width={168}
-            height={46}
-            style={{ marginTop: 22, width: 168, height: 46, objectFit: 'contain' }}
-          />
+          {!unbranded ? (
+            <img
+              src={assets.logo}
+              alt=''
+              width={168}
+              height={46}
+              style={{ marginTop: 22, width: 168, height: 46, objectFit: 'contain' }}
+            />
+          ) : null}
         </div>
       </div>
     ) : (
@@ -192,19 +195,21 @@ export const OgCard = ({ who, partner, big = true, assets }: CardProps) => (
           gap: 18,
         }}
       >
-        <img
-          src={assets.logo}
-          alt=''
-          width={150}
-          height={41}
-          style={{ width: 150, height: 41, objectFit: 'contain' }}
-        />
+        {!unbranded ? (
+          <img
+            src={assets.logo}
+            alt=''
+            width={150}
+            height={41}
+            style={{ width: 150, height: 41, objectFit: 'contain' }}
+          />
+        ) : null}
         <TitleCard
           src={assets.invite}
           width={340}
           height={453}
         />
-        <div style={{ fontSize: 20, color: '#7a3a40' }}>{ORG_NAME}</div>
+        {!unbranded ? <div style={{ fontSize: 20, color: '#7a3a40' }}>{ORG_NAME}</div> : null}
       </div>
     )}
   </div>

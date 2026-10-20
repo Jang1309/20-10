@@ -3,6 +3,8 @@
  * nhận một bộ lời chúc riêng, không đổi mỗi lần mở lại thiệp.
  */
 
+import type { WishKind } from '@/lib/wish-kind'
+
 export type Page2Wish = {
   intro: string
   body: string
@@ -194,9 +196,184 @@ export const pickBySeed = <T>(items: readonly T[], seed: string, salt = ''): T =
   return item
 }
 
-export const pickPage2Wish = (seed: string): Page2Wish => pickBySeed(PAGE_2_WISHES, seed, 'page2')
+/** Lời chúc trung tính — không nhắc tên tổ chức (thiệp gửi người ngoài). */
+const EXTERNAL_PAGE_2_WISHES: Page2Wish[] = [
+  {
+    intro: 'Tháng Mười dịu dàng gõ cửa, xin gửi đến Chị lời chúc 20/10 thật ấm áp.',
+    body: 'Giữa bộn bề công việc, Chị vẫn luôn giữ cho mọi thứ ngăn nắp, chu toàn và ấm áp. Sự chỉn chu ấy, nụ cười ấy thật đáng trân quý.',
+    closing: 'Chúc Chị luôn rạng rỡ như nắng thu, bình yên như những sớm mai.',
+  },
+  {
+    intro: 'Chúc mừng ngày Phụ nữ Việt Nam 20/10! Xin gửi đến Chị lời chúc chân thành nhất.',
+    body: 'Có những người không cần nói nhiều, chỉ cần có mặt là mọi việc đã thấy vững vàng hơn. Chị chính là người như thế: lặng lẽ, tận tâm và luôn đáng tin cậy.',
+    closing: 'Chúc Chị hôm nay hoa vây quanh, quà gõ cửa, yêu thương đong đầy.',
+  },
+  {
+    intro: 'Nhân ngày 20/10, xin gửi tặng Chị một bó lời chúc thật xinh.',
+    body: 'Cảm ơn Chị vì những ngày tận tâm, những lần sẵn lòng sẻ chia và cả những nụ cười tiếp sức giữa ngày bận rộn. Chị đã viết nên những trang rất đẹp trong câu chuyện của mình.',
+    closing: 'Chúc Chị luôn xinh đẹp, khỏe mạnh, mỗi sớm mai đều có lý do để cười.',
+  },
+  {
+    intro: 'Gửi Chị — một đóa hoa đẹp, nhân ngày Phụ nữ Việt Nam 20/10.',
+    body: 'Sự chu đáo của Chị nằm trong những điều rất nhỏ: một lời nhắc kịp lúc, một việc làm trọn vẹn, một câu hỏi han giữa ngày mệt mỏi. Chính những điều nhỏ ấy làm nên khác biệt lớn.',
+    closing: 'Chúc Chị được nâng niu dịu dàng, như cách Chị vẫn quan tâm mọi người.',
+  },
+  {
+    intro: 'Trân trọng gửi đến Chị lời chúc mừng ngày Phụ nữ Việt Nam 20/10.',
+    body: 'Một nơi tử tế không tự nhiên mà có. Nó được vun lên từ những con người như Chị: chân thành, trách nhiệm, và luôn nghĩ cho người khác trước khi nghĩ cho mình.',
+    closing: 'Chúc Chị một ngày nhiều niềm vui, nhiều bất ngờ và thật ít deadline!',
+  },
+  {
+    intro: 'Nhân ngày tôn vinh phụ nữ Việt Nam, xin gửi đến Chị lời tri ân sâu sắc.',
+    body: 'Sự bền bỉ của Chị giống như dòng nước: lặng lẽ, không ồn ào, nhưng luôn nuôi dưỡng và nâng đỡ những người đi cùng. May mắn thay vì có Chị trên hành trình này.',
+    closing: 'Chúc Chị lòng luôn an yên, công việc hanh thông, gia đình đầy tiếng cười.',
+  },
+  {
+    intro: 'Chúc Chị một ngày 20/10 ngọt ngào như hương hoa sữa đầu mùa thu!',
+    body: 'Có những lúc công việc dồn dập như mưa, vậy mà Chị vẫn giữ được sự điềm tĩnh và tận tâm hiếm có. Thật tự hào vì có Chị cùng đi trên chặng đường này.',
+    closing: 'Hôm nay, Chị cứ nghỉ ngơi, được chiều chuộng và làm “nữ chính” nhé!',
+  },
+  {
+    intro: 'Nhân dịp 20/10, xin gửi đến Chị lời cảm ơn từ tận trái tim.',
+    body: 'Cảm ơn Chị vì đã ở đây, đã cống hiến hết mình và luôn lan tỏa năng lượng tích cực, kể cả trong những ngày chẳng mấy dễ dàng. Có Chị, mọi người như được tiếp thêm lửa.',
+    closing: 'Chúc Chị luôn tươi tắn như những đóa hoa hôm nay Chị được nhận!',
+  },
+]
 
-export const pickPage3Wish = (seed: string): Page3Wish => pickBySeed(PAGE_3_WISHES, seed, 'page3')
+const hasBrand = (text: string) => /bateco/i.test(text)
+
+const EXTERNAL_PAGE_3_WISHES = PAGE_3_WISHES.filter(
+  (w) => !hasBrand(`${w.paragraph1} ${w.paragraph2} ${w.thanksLine}`),
+)
+
+/** Thiệp cho mẹ — xưng “Mẹ”, không branding. */
+const MOTHER_PAGE_2_WISHES: Page2Wish[] = [
+  {
+    intro: 'Nhân ngày Phụ nữ Việt Nam 20/10, con xin gửi đến Mẹ lời chúc thật chân thành.',
+    body: 'Cảm ơn Mẹ vì cả đời nâng niu, vì những bữa cơm nóng, những lời nhắc khẽ và vòng tay luôn rộng mở khi con mệt. Có Mẹ, con luôn biết mình được yêu.',
+    closing: 'Chúc Mẹ luôn khỏe, luôn vui, và được chiều chuộng như cách Mẹ vẫn chiều con.',
+  },
+  {
+    intro: '20/10 này, con muốn nói với Mẹ một điều giản dị: cảm ơn Mẹ rất nhiều.',
+    body: 'Mẹ là người dạy con yêu thương, dạy con đứng dậy sau mỗi lần vấp ngã, và dạy con rằng nhà luôn là nơi bình yên nhất. Con mang ơn Mẹ mỗi ngày.',
+    closing: 'Chúc Mẹ ngày 20/10 thật ấm áp, nhiều hoa và nhiều tiếng cười.',
+  },
+  {
+    intro: 'Gửi Mẹ yêu — người phụ nữ đẹp nhất trong mắt con, nhân ngày 20/10.',
+    body: 'Dù thời gian trôi, hình ảnh Mẹ vẫn luôn dịu dàng và vững vàng. Con lớn lên nhờ tình yêu ấy, và hôm nay chỉ muốn Mẹ được nghỉ ngơi, được yêu chiều thật nhiều.',
+    closing: 'Chúc Mẹ mạnh khỏe, an yên, hạnh phúc theo cách giản dị nhất.',
+  },
+  {
+    intro: 'Tháng Mười về, con lại nhớ Mẹ nhiều hơn — nhớ cả những điều nhỏ Mẹ làm mỗi ngày.',
+    body: 'Những lo toan thầm lặng, những hy sinh không kể, và nụ cười vẫn dành cho con. 20/10 này, con xin gửi hết yêu thương về phía Mẹ.',
+    closing: 'Chúc Mẹ được hạnh phúc, được chăm sóc và luôn có con bên cạnh.',
+  },
+]
+
+const MOTHER_PAGE_3_WISHES: Page3Wish[] = [
+  {
+    paragraph1:
+      'Mẹ không cần đợi đến 20/10 mới được trân trọng. Chỉ là hôm nay, con muốn nói điều đó thành lời, thật rõ ràng và không ngại ngùng.',
+    paragraph2: 'Chúc Mẹ luôn được lắng nghe, được thấu hiểu và nhận về những gì Mẹ xứng đáng.',
+    thanksLine: 'vì Mẹ đã cho con cả một bầu trời yêu thương.',
+  },
+  {
+    paragraph1:
+      '20/10 không chỉ là ngày của hoa và quà. Đó là ngày để Mẹ nhớ rằng mình cũng xứng đáng được chăm sóc, như cách Mẹ vẫn lặng lẽ chăm sóc mọi người.',
+    paragraph2:
+      'Hãy chậm lại một nhịp, cười nhiều hơn một chút và dành cho mình một khoảng trời riêng.',
+    thanksLine: 'vì Mẹ đã luôn là chỗ dựa vững vàng nhất của con.',
+  },
+  {
+    paragraph1:
+      'Vẻ đẹp của Mẹ không nằm ở việc gánh vác được tất cả, mà ở chỗ biết yêu thương bằng cả trái tim, dù có lúc mệt nhoài.',
+    paragraph2: 'Chúc Mẹ giữ được sự dịu dàng ấy, hôm nay và cả những ngày bình thường nhất.',
+    thanksLine: 'vì Mẹ đã khiến ngôi nhà luôn ấm áp.',
+  },
+]
+
+/** Thiệp cho người yêu — xưng “Em”, không branding. */
+const PARTNER_PAGE_2_WISHES: Page2Wish[] = [
+  {
+    intro: 'Nhân ngày 20/10, anh xin gửi đến Em lời chúc thật ngọt ngào và chân thành.',
+    body: 'Cảm ơn Em vì đã xuất hiện trong đời anh, vì những ngày cười cùng nhau và cả những lúc Em chỉ cần ở bên là anh thấy đủ. Em là món quà đẹp nhất anh có.',
+    closing: 'Chúc Em luôn xinh đẹp, hạnh phúc, và biết rằng anh luôn ở đây vì Em.',
+  },
+  {
+    intro: '20/10 này, anh muốn Em biết một điều: Em rất đặc biệt với anh.',
+    body: 'Từ nụ cười đến những điều nhỏ Em làm mỗi ngày, tất cả đều khiến anh thấy may mắn vì được yêu Em. Hôm nay, hãy để anh chiều chuộng Em thật nhiều.',
+    closing: 'Chúc Em một ngày ngập hoa, quà và yêu thương từ anh.',
+  },
+  {
+    intro: 'Gửi Em yêu — đóa hoa đẹp nhất trong mắt anh, nhân ngày Phụ nữ Việt Nam.',
+    body: 'Cảm ơn Em vì đã kiên nhẫn, vì đã tin anh, và vì đã làm trái tim anh ấm hơn mỗi ngày. Có Em, mọi thứ trở nên dịu dàng hơn rất nhiều.',
+    closing: 'Chúc Em luôn rạng rỡ, được yêu và được nâng niu đúng cách.',
+  },
+  {
+    intro: 'Tháng Mười dịu dàng, anh xin gửi Em một bó lời chúc thay cho những điều chưa kịp nói.',
+    body: 'Em xứng đáng được hạnh phúc, được lắng nghe và được yêu theo cách Em muốn. 20/10 này, anh chỉ muốn Em cười thật nhiều.',
+    closing: 'Chúc Em vui vẻ, bình yên, và luôn có anh sát bên.',
+  },
+]
+
+const PARTNER_PAGE_3_WISHES: Page3Wish[] = [
+  {
+    paragraph1:
+      'Em không cần đợi đến 20/10 mới được trân trọng. Chỉ là hôm nay, anh muốn nói điều đó thành lời, thật rõ ràng và không ngại ngùng.',
+    paragraph2: 'Chúc Em luôn được lắng nghe, được thấu hiểu và nhận về những gì Em xứng đáng.',
+    thanksLine: 'vì Em đã mang yêu thương vào từng ngày của anh.',
+  },
+  {
+    paragraph1:
+      '20/10 này, chỉ mong Em một điều giản dị: được vui theo cách mình muốn, được sống theo nhịp của riêng mình, như một đóa hoa nở đúng mùa.',
+    paragraph2: 'Không cần gồng, không cần hoàn hảo, chỉ cần hạnh phúc là đủ — và anh sẽ ở đây.',
+    thanksLine: 'vì Em đã chọn ở bên anh.',
+  },
+  {
+    paragraph1:
+      'Hoa không cần rực rỡ nhất mới được yêu. Em cũng vậy: chỉ cần là chính mình đã đủ đặc biệt và đủ đáng anh trân trọng rồi.',
+    paragraph2: 'Mong Em luôn tự tin bước đi trên con đường mình chọn, với một trái tim nhẹ tênh.',
+    thanksLine: 'vì Em đã làm thế giới của anh dịu dàng hơn.',
+  },
+]
+
+export const pickPage2Wish = (seed: string, kind: WishKind = 'bateco'): Page2Wish => {
+  const pool =
+    kind === 'mother'
+      ? MOTHER_PAGE_2_WISHES
+      : kind === 'partner'
+        ? PARTNER_PAGE_2_WISHES
+        : kind === 'external'
+          ? EXTERNAL_PAGE_2_WISHES
+          : PAGE_2_WISHES
+  return pickBySeed(pool, seed, 'page2')
+}
+
+export const pickPage3Wish = (seed: string, kind: WishKind = 'bateco'): Page3Wish => {
+  const pool =
+    kind === 'mother'
+      ? MOTHER_PAGE_3_WISHES
+      : kind === 'partner'
+        ? PARTNER_PAGE_3_WISHES
+        : kind === 'external'
+          ? EXTERNAL_PAGE_3_WISHES
+          : PAGE_3_WISHES
+  return pickBySeed(pool, seed, 'page3')
+}
+
+// Self-check: thiệp cá nhân / ngoài không được lọt chữ Bateco.
+if (process.env.NODE_ENV !== 'production') {
+  for (const pool of [EXTERNAL_PAGE_2_WISHES, MOTHER_PAGE_2_WISHES, PARTNER_PAGE_2_WISHES]) {
+    for (const w of pool) {
+      if (hasBrand(`${w.intro} ${w.body} ${w.closing}`)) {
+        throw new Error('Wish pool còn chữ Bateco')
+      }
+    }
+  }
+  if (EXTERNAL_PAGE_3_WISHES.length === 0) {
+    throw new Error('EXTERNAL_PAGE_3_WISHES rỗng')
+  }
+}
 
 /** Tách tên hiển thị 2 dòng kiểu thiệp: "Chị Trần Thị" / "Kim Trâm". */
 export const splitDisplayName = (

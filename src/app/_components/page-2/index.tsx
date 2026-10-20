@@ -21,6 +21,7 @@ import {
   pageStagger,
   writeIn,
 } from '@/lib/animations'
+import { parseWishKind, wishSignature } from '@/lib/wish-kind'
 import { pickPage2Wish, splitDisplayName } from '@/lib/wishes-20-10'
 
 const GoldDivider = ({ className }: { className?: string }) => (
@@ -40,7 +41,9 @@ const GoldDivider = ({ className }: { className?: string }) => (
 
 const Page2 = () => {
   const guest = useGuest()
-  const wish = pickPage2Wish(useWishSeed())
+  const kind = parseWishKind(guest?.wishKind)
+  const wish = pickPage2Wish(useWishSeed(), kind)
+  const signature = wishSignature(kind)
   const { line1, line2 } = splitDisplayName(guest?.honorific || 'Chị', guest?.name || 'Yêu quý')
   const revealed = useRevealOnce(useIsPageVisible(1))
   const [signed, setSigned] = useState(false)
@@ -146,25 +149,27 @@ const Page2 = () => {
           >
             Thân ái,
           </motion.p>
-          <div className='mt-1.5 flex items-center gap-1.5'>
-            {/* Padding âm-dương để nét lượn của font không bị mặt nạ cắt mất. */}
-            <motion.span
-              variants={inkWrite}
-              onAnimationComplete={(definition) => definition === 'show' && setSigned(true)}
-              style={inkMaskStyle}
-              className='-mx-3 -my-1.5 inline-block px-3 py-1.5 font-great-vibes text-[1.85rem] leading-[1.15] text-[#D92F45]'
-            >
-              Bateco Group
-            </motion.span>
-            <motion.span
-              variants={heartPop}
-              initial='hidden'
-              animate={signed ? 'show' : 'hidden'}
-              className='relative top-1 inline-flex'
-            >
-              <HeartIcon className='size-[0.7rem] fill-[#D92F45] text-[#D92F45]' />
-            </motion.span>
-          </div>
+          {signature && (
+            <div className='mt-1.5 flex items-center gap-1.5'>
+              {/* Padding âm-dương để nét lượn của font không bị mặt nạ cắt mất. */}
+              <motion.span
+                variants={inkWrite}
+                onAnimationComplete={(definition) => definition === 'show' && setSigned(true)}
+                style={inkMaskStyle}
+                className='-mx-3 -my-1.5 inline-block px-3 py-1.5 font-great-vibes text-[1.85rem] leading-[1.15] text-[#D92F45]'
+              >
+                {signature}
+              </motion.span>
+              <motion.span
+                variants={heartPop}
+                initial='hidden'
+                animate={signed ? 'show' : 'hidden'}
+                className='relative top-1 inline-flex'
+              >
+                <HeartIcon className='size-[0.7rem] fill-[#D92F45] text-[#D92F45]' />
+              </motion.span>
+            </div>
+          )}
         </div>
       </motion.div>
       <SpineShadow side='right' />

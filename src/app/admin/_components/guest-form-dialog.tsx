@@ -17,6 +17,14 @@ import {
 } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { NativeSelect, NativeSelectOption } from '@/components/ui/native-select'
+import {
+  WISH_KINDS,
+  WISH_KIND_LABEL,
+  defaultHonorific,
+  parseWishKind,
+  type WishKind,
+} from '@/lib/wish-kind'
 
 export type GuestFormValue = {
   guestId?: string
@@ -27,6 +35,7 @@ export type GuestFormValue = {
   unit: string
   department: string
   partner: string
+  wishKind: WishKind
   coverPhotoUrl?: string | null
   page3PhotoUrl?: string | null
 }
@@ -39,6 +48,7 @@ const EMPTY: GuestFormValue = {
   unit: '',
   department: '',
   partner: '',
+  wishKind: 'bateco',
 }
 
 type Props = {
@@ -60,6 +70,19 @@ const GuestFormDialog = ({ origin, onSaved, guest }: Props) => {
     if (next) setForm(guest ?? EMPTY)
   }
 
+  const setWishKind = (kind: WishKind) => {
+    setForm((prev) => {
+      const next = { ...prev, wishKind: kind }
+      // Gợi ý danh xưng khi đổi loại (chỉ nếu đang để mặc định của loại cũ).
+      const wasDefault =
+        prev.honorific === defaultHonorific(prev.wishKind) ||
+        prev.honorific === 'Chị' ||
+        prev.honorific === ''
+      if (wasDefault) next.honorific = defaultHonorific(kind)
+      return next
+    })
+  }
+
   const submit = async () => {
     if (!form.name.trim()) {
       toast.error('Nhập họ tên.')
@@ -68,13 +91,14 @@ const GuestFormDialog = ({ origin, onSaved, guest }: Props) => {
     setSaving(true)
     try {
       const payload = {
-        honorific: form.honorific.trim() || 'Chị',
+        honorific: form.honorific.trim() || defaultHonorific(form.wishKind),
         name: form.name.trim(),
         category: form.category.trim() || undefined,
         title: form.title.trim() || undefined,
         unit: form.unit.trim() || undefined,
         department: form.department.trim() || undefined,
         partner: form.partner.trim() || undefined,
+        wishKind: form.wishKind,
       }
 
       const response = isEdit
@@ -131,6 +155,34 @@ const GuestFormDialog = ({ origin, onSaved, guest }: Props) => {
           <DialogTitle>{isEdit ? 'Sửa thông tin' : 'Thêm người nhận thiệp'}</DialogTitle>
         </DialogHeader>
 
+        <div className='grid gap-1.5'>
+          <Label htmlFor='g-wishKind'>Loại thiệp</Label>
+          <NativeSelect
+            id='g-wishKind'
+            className='w-full'
+            value={form.wishKind}
+            onChange={(event) => setWishKind(parseWishKind(event.target.value))}
+          >
+            {WISH_KINDS.map((kind) => (
+              <NativeSelectOption
+                key={kind}
+                value={kind}
+              >
+                {WISH_KIND_LABEL[kind]}
+              </NativeSelectOption>
+            ))}
+          </NativeSelect>
+          <p className='text-xs text-muted-foreground'>
+            {form.wishKind === 'mother'
+              ? 'Lời chúc cho mẹ, chữ ký “Con yêu mẹ”, không logo Bateco.'
+              : form.wishKind === 'partner'
+                ? 'Lời chúc cho người yêu, chữ ký “Anh yêu em”, không logo Bateco.'
+                : form.wishKind === 'external'
+                  ? 'Lời chúc trung tính, không logo / chữ ký Bateco.'
+                  : 'Thiệp có branding Bateco Group.'}
+          </p>
+        </div>
+
         <div className='grid grid-cols-[6rem_1fr] gap-3'>
           <div className='grid gap-1.5'>
             <Label htmlFor='g-honorific'>Danh xưng</Label>
@@ -138,7 +190,7 @@ const GuestFormDialog = ({ origin, onSaved, guest }: Props) => {
               id='g-honorific'
               value={form.honorific}
               onChange={(event) => setForm((prev) => ({ ...prev, honorific: event.target.value }))}
-              placeholder='Chị'
+              placeholder={defaultHonorific(form.wishKind)}
             />
           </div>
           <div className='grid gap-1.5'>

@@ -26,6 +26,7 @@ import {
   writeIn,
 } from '@/lib/animations'
 import { cn } from '@/lib/utils'
+import { parseWishKind } from '@/lib/wish-kind'
 import { pickPage3Wish } from '@/lib/wishes-20-10'
 
 const GoldDivider = ({ className }: { className?: string }) => (
@@ -171,7 +172,7 @@ const ThanksBurst = ({ play }: { play: boolean }) => {
 
 const Page3 = () => {
   const guest = useGuest()
-  const wish = pickPage3Wish(useWishSeed())
+  const wish = pickPage3Wish(useWishSeed(), parseWishKind(guest?.wishKind))
   const revealed = useRevealOnce(useIsPageVisible(2))
   const [thanksShown, setThanksShown] = useState(false)
   // Desktop trải đôi: trang 2 và 3 hiện cùng lúc → trang 3 chạy sau trang 2 một nhịp.

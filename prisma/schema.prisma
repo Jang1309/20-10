@@ -23,6 +23,8 @@ model Guest {
   partner    String?
   /// Ảnh chân dung hiển thị ở trang 3 của thiệp (URL), để trống thì dùng thiết kế mặc định.
   avatarUrl  String?
+  /// bateco | external | mother | partner — branding + lời chúc + chữ ký.
+  wishKind   String   @default("bateco")
   link       String
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt

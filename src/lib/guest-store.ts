@@ -31,6 +31,7 @@ export const replaceGuestList = async (guests: Guest[], origin = ''): Promise<nu
       unit: guest.unit ?? null,
       department: guest.department ?? null,
       partner: guest.partner ?? null,
+      wishKind: guest.wishKind ?? 'bateco',
       link: inviteUrl(slug, linkOrigin),
     }
   })
@@ -86,6 +87,7 @@ export const mergeGuestList = async (guests: Guest[], origin = ''): Promise<numb
         unit: guest.unit ?? null,
         department: guest.department ?? null,
         partner: guest.partner ?? null,
+        wishKind: guest.wishKind ?? 'bateco',
         link: inviteUrl(slug, linkOrigin),
       }
     })

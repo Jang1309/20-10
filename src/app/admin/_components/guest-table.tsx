@@ -44,6 +44,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import { parseWishKind } from '@/lib/wish-kind'
 
 export type GuestRow = {
   guestId: string
@@ -55,6 +56,7 @@ export type GuestRow = {
   unit: string | null
   department: string | null
   partner: string | null
+  wishKind: string
   link: string
   coverPhotoUrl?: string | null
   page3PhotoUrl?: string | null
@@ -394,6 +396,7 @@ const GuestTable = ({ rows, loading, origin, onRefresh }: Props) => {
                           unit: row.unit ?? '',
                           department: row.department ?? '',
                           partner: row.partner ?? '',
+                          wishKind: parseWishKind(row.wishKind),
                           coverPhotoUrl: row.coverPhotoUrl,
                           page3PhotoUrl: row.page3PhotoUrl,
                         }}

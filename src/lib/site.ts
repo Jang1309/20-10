@@ -15,6 +15,8 @@ export const SHARE_TITLE = 'Thiệp chúc 20/10'
 export const OG_ALT = `${SHARE_TITLE} · ${ORG_NAME}`
 export const SHARE_WHO_FALLBACK = 'Thân gửi'
 
-/** Câu mô tả chung, chèn tên khách nếu có. */
-export const inviteDescription = (guestLine?: string) =>
-  `${ORG_NAME} xin gửi đến ${guestLine ?? 'Chị'} lời chúc mừng chân thành nhân Ngày Phụ nữ Việt Nam 20/10.`
+/** Câu mô tả chung, chèn tên khách nếu có. `unbranded` = thiệp ngoài, không nhắc org. */
+export const inviteDescription = (guestLine?: string, unbranded = false) =>
+  unbranded
+    ? `Xin gửi đến ${guestLine ?? 'Chị'} lời chúc mừng chân thành nhân Ngày Phụ nữ Việt Nam 20/10.`
+    : `${ORG_NAME} xin gửi đến ${guestLine ?? 'Chị'} lời chúc mừng chân thành nhân Ngày Phụ nữ Việt Nam 20/10.`

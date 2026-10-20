@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 
 import { inviteUrl, uniqueInviteSlug } from '@/lib/guest'
 import { prisma } from '@/lib/prisma'
+import { parseWishKind } from '@/lib/wish-kind'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -15,6 +16,7 @@ type PatchBody = {
   unit?: string
   department?: string
   partner?: string
+  wishKind?: string
 }
 
 const clean = (value: string | undefined) => value?.trim() || null
@@ -69,6 +71,7 @@ export async function PATCH(request: Request, { params }: RouteContext) {
         unit: body.unit === undefined ? current.unit : clean(body.unit),
         department: body.department === undefined ? current.department : clean(body.department),
         partner: body.partner === undefined ? current.partner : clean(body.partner),
+        wishKind: body.wishKind === undefined ? current.wishKind : parseWishKind(body.wishKind),
         link: inviteUrl(slug, origin),
       },
     })

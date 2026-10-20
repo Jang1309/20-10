@@ -7,6 +7,8 @@
  * `uniqueInviteSlug`), trang `src/app/[invite]/page.tsx` tra khách theo slug này.
  */
 
+import type { WishKind } from '@/lib/wish-kind'
+
 export type Guest = {
   /** `guestId` trong DB — có khi thiệp được mở từ một khách đã lưu. */
   id?: string
@@ -28,6 +30,8 @@ export type Guest = {
   coverUrl?: string
   /** Tên tab trong file Excel: "Nội bộ" / "Khách" … */
   category?: string
+  /** Loại thiệp: bateco | external | mother | partner */
+  wishKind?: WishKind
 }
 
 /** Accent-free, lowercase, dash-separated slug of a Vietnamese string. */

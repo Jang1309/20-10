@@ -5,6 +5,7 @@ import InvitationFlipbook from '@/app/_components/invitation-flipbook'
 import { type Guest, photoUrl } from '@/lib/guest'
 import { prisma } from '@/lib/prisma'
 import { SHARE_TITLE, inviteDescription } from '@/lib/site'
+import { isUnbranded, parseWishKind } from '@/lib/wish-kind'
 
 export const dynamic = 'force-dynamic'
 
@@ -25,7 +26,8 @@ export async function generateMetadata({ params }: InvitePageProps): Promise<Met
 
   const who = [g.honorific, g.name].filter(Boolean).join(' ')
   const title = `${SHARE_TITLE} · ${who}`
-  const description = inviteDescription(guestLine(g))
+  const wishKind = parseWishKind(g.wishKind)
+  const description = inviteDescription(guestLine(g), isUnbranded(wishKind))
 
   return {
     title,
@@ -71,6 +73,7 @@ const InvitePage = async ({ params }: InvitePageProps) => {
     coverUrl: cover ?? record.avatarUrl ?? undefined,
     avatarUrl: page3,
     category: record.category ?? undefined,
+    wishKind: parseWishKind(record.wishKind),
   }
 
   return <InvitationFlipbook guest={guest} />

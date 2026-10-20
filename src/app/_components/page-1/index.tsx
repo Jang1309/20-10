@@ -17,6 +17,7 @@ import {
   scaleIn,
 } from '@/lib/animations'
 import { cn } from '@/lib/utils'
+import { isUnbranded, parseWishKind } from '@/lib/wish-kind'
 import { splitDisplayName } from '@/lib/wishes-20-10'
 
 /**
@@ -93,6 +94,7 @@ const CoverPortrait = ({ src, name }: { src: string; name: string }) => (
 const Page1 = () => {
   const guest = useGuest()
   const avatarUrl = guest?.coverUrl
+  const showLogo = !isUnbranded(parseWishKind(guest?.wishKind))
   const { line2 } = splitDisplayName(undefined, guest?.name ?? '')
   const shortName = [guest?.honorific || 'Chị', line2].join(' ')
   const shown = useRevealAfterMount(450)
@@ -120,29 +122,37 @@ const Page1 = () => {
         sizes='(max-width: 639px) 92vw, 460px'
         className='object-fill scale-[1.04]'
       />
-      <div
-        className={cn(
-          'absolute-x-center z-[2]',
-          avatarUrl ? 'top-[5.5%] w-[38%]' : 'top-[6%] w-[44%]',
-        )}
-      >
-        <motion.div variants={dropIn}>
-          <Image
-            src='/d-logo.png'
-            alt='Bateco Group'
-            width={1596}
-            height={411}
-            priority
-            unoptimized
-            className='h-auto w-full object-contain'
-          />
-        </motion.div>
-      </div>
+      {showLogo && (
+        <div
+          className={cn(
+            'absolute-x-center z-[2]',
+            avatarUrl ? 'top-[5.5%] w-[38%]' : 'top-[6%] w-[44%]',
+          )}
+        >
+          <motion.div variants={dropIn}>
+            <Image
+              src='/d-logo.png'
+              alt='Bateco Group'
+              width={1596}
+              height={411}
+              priority
+              unoptimized
+              className='h-auto w-full object-contain'
+            />
+          </motion.div>
+        </div>
+      )}
       {/* Có ảnh → thu tiêu đề lại và đẩy lên để chừa chỗ cho chân dung phía trên cụm hoa. */}
       <div
         className={cn(
           'absolute-x-center z-[1]',
-          avatarUrl ? 'top-[8.5%] w-[64%]' : 'top-[11%] w-[78%]',
+          avatarUrl
+            ? showLogo
+              ? 'top-[8.5%] w-[64%]'
+              : 'top-[6%] w-[64%]'
+            : showLogo
+              ? 'top-[11%] w-[78%]'
+              : 'top-[8%] w-[78%]',
         )}
       >
         <motion.div
